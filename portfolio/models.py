@@ -11,7 +11,7 @@ class Portfolio(models.Model):
 		)
 
 	name = models.CharField(max_length=100, unique=True)
-	slug = models.SlugField(max_length=100)
+	slug = models.SlugField(max_length=100, unique=True)
 	description = models.TextField(max_length=255, null=True, blank=True)
 	back_end = models.CharField(max_length=255)
 	front_end = models.CharField(max_length=255)

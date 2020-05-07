@@ -86,7 +86,11 @@
 
         <div class="row">
           <div class="col-lg-12" data-aos="fade-right">
-            <img src="{{ project.cover.url }}" class="img-fluid border border-secondary" alt="{{ project.name }}">
+            {% if not project.cover %}
+            <img src="{% static 'portfolio/assets/img/portfolio/coming_soon.png' %}" class="img-fluid border border-secondary" alt="{{ project.name }}" width="750" height="300">
+            {% else %}
+            <img src="{{ project.cover.url }}" class="img-fluid border border-secondary" alt="{{ project.name }}" width="750" height="300">
+            {% endif %}
           </div>
           <div class="col-lg-8 pt-3 content" data-aos="fade-left">
             <h3>{{ project.name }}</h3>

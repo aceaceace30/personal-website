@@ -318,9 +318,13 @@
           	{% if project.classification == 'company' %}
 	          <div class="col-lg-4 col-md-6 portfolio-item filter-company">
 	            <div class="portfolio-wrap">
-	              <img src="{{ project.cover.url }}" class="img-fluid" alt="{{ project.name }}">
+                {% if not project.cover %}
+                  <img src="{% static 'portfolio/assets/img/portfolio/coming_soon.png' %}" class="img-fluid" alt="{{ project.name }}" width="500" height="300">
+                {% else %}
+                  <img src="{{ project.cover.url }}" class="img-fluid" alt="{{ project.name }}">
+                {% endif %}
 	              <div class="portfolio-links">
-	                <a href="{{ project.cover.url }}" data-gall="portfolioGallery" class="venobox" title="{{ project.name }}"><i class="bx bx-plus"></i></a>
+	                <a href="{% if project.cover %}{{ project.cover.url }}{% else %}#{% endif %}" data-gall="portfolioGallery" class="venobox" title="{{ project.name }}"><i class="bx bx-plus"></i></a>
 	                <a href="{% url 'portfolio:detail' project.slug %}" title="More Details" style="font-size:14px; padding-top:10px;">More details</a>
 	              </div>
 	            </div>
@@ -328,21 +332,29 @@
 	        {% elif project.classification == 'freelance' %}
 		       <div class="col-lg-4 col-md-6 portfolio-item filter-freelance">
 	             <div class="portfolio-wrap">
-	              <img src="{{ project.cover.url }}" class="img-fluid" alt="{{ project.name }}">
+	              {% if not project.cover %}
+                  <img src="{% static 'portfolio/assets/img/portfolio/coming_soon.png' %}" class="img-fluid" alt="{{ project.name }}" width="500" height="300">
+                {% else %}
+                  <img src="{{ project.cover.url }}" class="img-fluid" alt="{{ project.name }}">
+                {% endif %}
 	              <div class="portfolio-links">
-	                <a href="{{ project.cover.url }}" data-gall="portfolioGallery" class="venobox" title="{{ project.name }}"><i class="bx bx-plus"></i></a>
-	                <a href="{% url 'portfolio:detail' project.slug %}" title="More Details" style="font-size:14px; padding-top:10px;">More details</a>
-	              </div>
+                  <a href="{% if project.cover %}{{ project.cover.url }}{% else %}#{% endif %}" data-gall="portfolioGallery" class="venobox" title="{{ project.name }}"><i class="bx bx-plus"></i></a>
+                  <a href="{% url 'portfolio:detail' project.slug %}" title="More Details" style="font-size:14px; padding-top:10px;">More details</a>
+                </div>
 	            </div>
 	           </div>
 	        {% elif project.classification == 'personal' %}
 		       <div class="col-lg-4 col-md-6 portfolio-item filter-personal">
 	             <div class="portfolio-wrap">
-	              <img src="{{ project.cover.url }}" class="img-fluid" alt="{{ project.name }}">
+	              {% if not project.cover %}
+                  <img src="{% static 'portfolio/assets/img/portfolio/coming_soon.png' %}" class="img-fluid" alt="{{ project.name }}" width="500" height="300">
+                {% else %}
+                  <img src="{{ project.cover.url }}" class="img-fluid" alt="{{ project.name }}">
+                {% endif %}
 	              <div class="portfolio-links">
-	                <a href="{{ project.cover.url }}" data-gall="portfolioGallery" class="venobox" title="{{ project.name }}"><i class="bx bx-plus"></i></a>
-	                <a href="{% url 'portfolio:detail' project.slug %}" title="More Details" style="font-size:14px; padding-top:10px;">More details</a>
-	              </div>
+                  <a href="{% if project.cover %}{{ project.cover.url }}{% else %}#{% endif %}" data-gall="portfolioGallery" class="venobox" title="{{ project.name }}"><i class="bx bx-plus"></i></a>
+                  <a href="{% url 'portfolio:detail' project.slug %}" title="More Details" style="font-size:14px; padding-top:10px;">More details</a>
+                </div>
 	            </div>
 	           </div>
           	{% endif %}

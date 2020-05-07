@@ -112,18 +112,19 @@
               {{ project.description }}
             </p>
             <hr/>
-            {% if next_project %}
+            {% if next_project or previous_project %}
             <div class="col-lg-12">
               {% if previous_project %}
                 <h4>Previous Project: <a href="{% url 'portfolio:detail' previous_project.slug %}">{{ previous_project.name }}</a></h4>
               {% else %}
                 <h3><a href="{% url 'portfolio:homepage' %}#portfolio">Back to Portfolio</a></h3>
               {% endif %}
-              <h4>Next Project: <a href="{% url 'portfolio:detail' next_project.slug %}">{{ next_project.name }}</a></h4>
-            </div>
-            {% else %}
-            <div class="col-lg-12">
-              <h3><a href="{% url 'portfolio:homepage' %}#portfolio">Back to Portfolio</a></h3>
+
+              {% if next_project %}
+                <h4>Next Project: <a href="{% url 'portfolio:detail' next_project.slug %}">{{ next_project.name }}</a></h4>
+              {% else %}
+                <h3><a href="{% url 'portfolio:homepage' %}#portfolio">Back to Portfolio</a></h3>
+              {% endif %}
             </div>
             {% endif %}
           </div>

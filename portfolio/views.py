@@ -3,13 +3,17 @@ from django.http import HttpResponse
 
 from .models import Portfolio
 
+from django.conf import settings
+import os
+
 
 def homepage(request):
 
 	projects = Portfolio.objects.all()
 
 	template_name = 'portfolio/index.html'
-	return render(request, template_name, {'projects': projects})
+	resume_path = 'media/resume/CV-Michael-Jay-Pery-Ababao.pdf'
+	return render(request, template_name, {'projects': projects, 'resume_path': resume_path})
 
 def detail(request, name):
 	project = get_object_or_404(Portfolio, slug=name)

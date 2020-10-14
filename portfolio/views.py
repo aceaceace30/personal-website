@@ -1,37 +1,22 @@
-from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponse
+from django.views.generic import ListView, DetailView
 
-from .models import Portfolio
-
-from django.conf import settings
-import os
+from .mixins import InformationMixin
+from .models import Project
 
 
-def homepage(request):
-
-	projects = Portfolio.objects.all()
-
+class HomeListView(InformationMixin, ListView):
 	template_name = 'portfolio/index.html'
-	resume_path = 'media/resume/CV-Michael-Jay-Pery-Ababao.pdf'
-	return render(request, template_name, {'projects': projects, 'resume_path': resume_path})
+	model = Project
+	context_object_name = 'projects'
 
-def detail(request, name):
-	project = get_object_or_404(Portfolio, slug=name)
-	template_name = 'portfolio/detail.html'
-	next_project = Portfolio.objects.exclude(pk__lte=project.pk).order_by('id')
-	previous_project = None
-	if project.pk != 1:
-		previous_project = Portfolio.objects.get(pk=(project.pk-1))
-	
-	if not next_project:
-		next_project = None
-	else:
-		next_project = next_project[0]
 
-	context = {
-		'project': project,
-		'next_project': next_project,
-		'previous_project': previous_project
-	}
+class ProjectDetailView(DetailView):
+	template_name = 'portfolio/project_details.html'
+	model = Project
+	context_object_name = 'project'
 
-	return render(request, template_name, context)
+	def get_context_data(self, **kwargs):
+		context = super().get_context_data(**kwargs)
+		context['next_project'] = self.get_object().get_previous_or_next_project('n')
+		context['previous_project'] = self.get_object().get_previous_or_next_project('p')
+		return context

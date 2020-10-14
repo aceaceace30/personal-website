@@ -71,7 +71,7 @@ class About(models.Model):
 class Skill(models.Model):
     name = models.CharField(max_length=150, unique=True)
     value = models.CharField(max_length=150)
-    ordering = models.PositiveIntegerField()
+    ordering = models.PositiveIntegerField(unique=True)
     active = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
@@ -98,16 +98,19 @@ class Task(models.Model):
 
 
 class JobExperience(models.Model):
-    job_name = models.CharField(max_length=150)
     job_title = models.CharField(max_length=150)
+    company = models.CharField(max_length=150)
     duration = models.CharField(max_length=150)
     task = models.ManyToManyField(Task, through='JobExperienceTask', related_name='job_experiences')
-    ordering = models.PositiveIntegerField()
+    ordering = models.PositiveIntegerField(unique=True)
     active = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         ordering = ['ordering']
+
+    def __str__(self):
+        return f'{self.job_title} - {self.company}'
 
 
 class JobExperienceTask(models.Model):

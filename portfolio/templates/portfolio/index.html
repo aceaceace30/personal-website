@@ -134,7 +134,8 @@
                         <div class="progress">
                             <span class="skill">{{ skill.name }} <i class="val">{{ skill.value }}%</i></span>
                             <div class="progress-bar-wrap">
-                                <div class="progress-bar" role="progressbar" aria-valuenow="{{ skill.value }}" aria-valuemin="0"
+                                <div class="progress-bar" role="progressbar" aria-valuenow="{{ skill.value }}"
+                                     aria-valuemin="0"
                                      aria-valuemax="100"></div>
                             </div>
                         </div>
@@ -146,7 +147,8 @@
                         <div class="progress">
                             <span class="skill">{{ skill.name }} <i class="val">{{ skill.value }}%</i></span>
                             <div class="progress-bar-wrap">
-                                <div class="progress-bar" role="progressbar" aria-valuenow="{{ skill.value }}" aria-valuemin="0"
+                                <div class="progress-bar" role="progressbar" aria-valuenow="{{ skill.value }}"
+                                     aria-valuemin="0"
                                      aria-valuemax="100"></div>
                             </div>
                         </div>
@@ -194,27 +196,18 @@
                 </div>
                 <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
                     <h3 class="resume-title">Professional Experience</h3>
-                    <div class="resume-item">
-                        <h4>Programmer</h4>
-                        <h5>January 2019 - Present</h5>
-                        <p><em>Halcyon Marine Healthcare Systems </em></p>
-                        <ul>
-                            <li>Develops required web applications needed.</li>
-                            <li>Maintains and extend current web applications used.</li>
-                            <li>Creates complex reports and statistics based on client needs.</li>
-                        </ul>
-                    </div>
-                    <div class="resume-item">
-                        <h4>Technical Support</h4>
-                        <h5>May 2018 - December 2018</h5>
-                        <p><em>New Hatchin Trading Corporation</em></p>
-                        <ul>
-                            <li>Provides technical support for software and hardware used by the organization.</li>
-                            <li>Develops required web application needed.</li>
-                            <li>Maintains 3rd party softwares.</li>
-                            <li>Performs timely hardware and software upgrades as required.</li>
-                        </ul>
-                    </div>
+                    {% for je in job_experiences %}
+                        <div class="resume-item">
+                            <h4>{{ je.job_title }}</h4>
+                            <h5>{{ je.duration }}</h5>
+                            <p><em>{{ je.company }}</em></p>
+                            <ul>
+                                {% for task in je.task.all %}
+                                    <li>{{ task.description }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    {% endfor %}
                 </div>
             </div>
 
@@ -324,23 +317,21 @@
                         <div class="address">
                             <i class="icofont-google-map"></i>
                             <h4>Location:</h4>
-                            <p>Novaliches Street Makati City</p>
+                            <p>{{ info.address }}</p>
                         </div>
 
                         <div class="email">
                             <i class="icofont-envelope"></i>
                             <h4>Email:</h4>
-                            <p>michaelababao200@gmail.com</p>
+                            <p>{{ info.email }}</p>
                         </div>
 
                         <div class="phone">
                             <i class="icofont-phone"></i>
                             <h4>Call:</h4>
-                            <p>+639052950486</p>
+                            <p>{{ info.mobile_no }}</p>
                         </div>
-
                     </div>
-
                 </div>
 
                 <div class="col-lg-7 mt-5 mt-lg-0 d-flex align-items-stretch">

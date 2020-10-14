@@ -2,6 +2,10 @@ from django.contrib import admin
 from .models import Project, About, Skill, Task, JobExperience
 
 
+class TaskInline(admin.TabularInline):
+    model = JobExperience.task.through
+
+
 @admin.register(Project)
 class ProjectAdmin(admin.ModelAdmin):
 
@@ -37,7 +41,7 @@ class TaskAdmin(admin.ModelAdmin):
 
 @admin.register(JobExperience)
 class JobExperienceAdmin(admin.ModelAdmin):
-
+    inlines = (TaskInline, )
     search_fields = ('job_name', 'job_title')
-    list_display = ('job_name', 'job_title', 'ordering', 'active', 'created_at')
+    list_display = ('job_title', 'company', 'ordering', 'active', 'created_at')
     readonly_fields = ('created_at',)

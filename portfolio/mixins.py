@@ -1,6 +1,4 @@
-from django.core.paginator import Paginator
-
-from portfolio.models import About, Skill
+from portfolio.models import About, Skill, JobExperience
 
 
 class InformationMixin:
@@ -12,6 +10,7 @@ class InformationMixin:
         context['resume_path'] = 'media/resume/CV-Michael-Jay-Pery-Ababao.pdf'
         context = self.add_info(context)
         context = self.add_skills(context)
+        context = self.add_job_experience(context)
         return context
 
     @staticmethod
@@ -26,4 +25,9 @@ class InformationMixin:
         skill_set1, skill_set2 = Skill.get_splitted_skill_set()
         context['skill_set1'] = skill_set1
         context['skill_set2'] = skill_set2
+        return context
+
+    @staticmethod
+    def add_job_experience(context):
+        context['job_experiences'] = JobExperience.objects.filter(active=True)
         return context

@@ -51,11 +51,11 @@
             </div>
 
             <div class="portfolio-description">
-                <h2>{{ project.name }}</h2>
-                <p>{{ project.description }}</p>
+                <h2 class="font-weight-bold">{{ project.name }}</h2>
+                <p>{{ project.description|safe }}</p>
 
                 {% if previous_project %}
-                <h5>Previous Project:
+                <h5 class="pt-4">Previous Project:
                     <a href="{% url 'portfolio:project_details' previous_project.slug %}">
                         {{ previous_project.name }}
                     </a>
@@ -63,7 +63,7 @@
                 {% endif %}
 
                 {% if next_project %}
-                <h5>
+                <h5 class="pt-4">
                     Next Project:
                     <a href="{% url 'portfolio:project_details' next_project.slug %}">
                         {{ next_project.name }}

@@ -22,6 +22,9 @@ INSTALLED_APPS = [
     # project_apps
     'portfolio',
 
+    # packages
+    'ckeditor',
+
     # django built-ins
     'django.contrib.admin',
     'django.contrib.auth',

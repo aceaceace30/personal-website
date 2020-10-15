@@ -1,6 +1,8 @@
 import os
 
 from datetime import date, datetime
+
+from ckeditor.fields import RichTextField
 from django.core.paginator import Paginator
 from django.db import models
 from django.urls import reverse
@@ -19,7 +21,7 @@ class Project(models.Model):
 
     name = models.CharField(max_length=100, unique=True)
     slug = models.SlugField(max_length=100, unique=True)
-    description = models.TextField(max_length=1200, null=True, blank=True)
+    description = RichTextField(null=True, blank=True)
     back_end = models.CharField(max_length=255, verbose_name='Back-End Technology')
     front_end = models.CharField(max_length=255, verbose_name='Front-End Technology')
     classification = models.CharField(choices=CLASSIFICATION_CHOICES, max_length=30)

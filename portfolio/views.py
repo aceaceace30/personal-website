@@ -15,7 +15,7 @@ class HomeListView(InformationMixin, ListView):
 
 
 class ProjectDetailView(DetailView):
-    template_name = 'portfolio/project-details2.html'
+    template_name = 'portfolio/project_details.html'
     model = Project
     context_object_name = 'project'
 

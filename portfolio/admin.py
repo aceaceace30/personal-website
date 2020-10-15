@@ -1,14 +1,20 @@
 from django.contrib import admin
-from .models import Project, About, Skill, Task, JobExperience, Message
+from .models import Project, About, Skill, Task, JobExperience, Message, ProjectImage
 
 
 class TaskInline(admin.TabularInline):
     model = JobExperience.task.through
 
 
+class ProjectImageInline(admin.StackedInline):
+    model = ProjectImage
+    readonly_fields = ('created_at',)
+
+
 @admin.register(Project)
 class ProjectAdmin(admin.ModelAdmin):
 
+    inlines = (ProjectImageInline,)
     list_filter = ('classification', 'created_at')
     search_fields = ('name', 'slug')
     list_display = ('name', 'slug', 'ordering', 'created_at')
@@ -41,7 +47,8 @@ class TaskAdmin(admin.ModelAdmin):
 
 @admin.register(JobExperience)
 class JobExperienceAdmin(admin.ModelAdmin):
-    inlines = (TaskInline, )
+
+    inlines = (TaskInline,)
     search_fields = ('job_name', 'job_title')
     list_display = ('job_title', 'company', 'ordering', 'active', 'created_at')
     readonly_fields = ('created_at',)

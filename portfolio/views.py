@@ -15,7 +15,7 @@ class HomeListView(InformationMixin, ListView):
 
 
 class ProjectDetailView(DetailView):
-    template_name = 'portfolio/project_details.html'
+    template_name = 'portfolio/project-details2.html'
     model = Project
     context_object_name = 'project'
 
@@ -38,7 +38,7 @@ def send_message(request):
             f'{message.subject} - {message.email}',
             message.message,
             settings.EMAIL_HOST_USER,
-            [settings.EMAIL_HOST_USER],
+            [settings.EMAIL_ADMIN],
             fail_silently=False
         )
 

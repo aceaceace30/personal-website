@@ -1,5 +1,6 @@
-from datetime import date, datetime
+import os
 
+from datetime import date, datetime
 from django.core.paginator import Paginator
 from django.db import models
 from django.urls import reverse
@@ -22,7 +23,6 @@ class Project(models.Model):
     back_end = models.CharField(max_length=255, verbose_name='Back-End Technology')
     front_end = models.CharField(max_length=255, verbose_name='Front-End Technology')
     classification = models.CharField(choices=CLASSIFICATION_CHOICES, max_length=30)
-    cover = models.ImageField(null=True, blank=True, upload_to='project_images/')
     git_link = models.URLField(null=True, blank=True)
     website_link = models.URLField(null=True, blank=True)
     ordering = models.PositiveIntegerField(unique=True)
@@ -45,6 +45,24 @@ class Project(models.Model):
                 return Project.objects.get(ordering=self.ordering+1)
         except self.DoesNotExist:
             return None
+
+
+class ProjectImage(models.Model):
+    project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name='project_images')
+    image = models.ImageField(upload_to='project_images')
+    description = models.TextField(null=True, blank=True)
+    is_cover = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['project']
+
+    def __str__(self):
+        return f'{self.project.name} - {self.get_image_name}'
+
+    @property
+    def get_image_name(self):
+        return os.path.basename(self.image.name)
 
 
 class About(models.Model):

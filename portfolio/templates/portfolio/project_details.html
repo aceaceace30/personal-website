@@ -40,10 +40,10 @@
                         <li><strong>Back-End</strong>: {{ project.back_end }}</li>
                         <li><strong>Front-End</strong>: {{ project.front_end }}</li>
                         {% if project.git_link %}
-                            <li><strong>Github Repo:</strong>: <a href="{{ project.git_link }}">{{ project.git_link }}</a></li>
+                            <li><strong>Github Repo:</strong>: <a href="{{ project.git_link }}" target="_blank">{{ project.git_link }}</a></li>
                         {% endif %}
                         {% if project.website_link %}
-                            <li><strong>Demo</strong>: <a href="{{ project.website_link }}">{{ project.website_link }}</a></li>
+                            <li><strong>Demo</strong>: <a href="{{ project.website_link }}" target="_blank">{{ project.website_link }}</a></li>
                         {% endif %}
                     </ul>
                 </div>

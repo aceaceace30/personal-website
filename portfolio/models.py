@@ -116,3 +116,17 @@ class JobExperience(models.Model):
 class JobExperienceTask(models.Model):
     job_experience = models.ForeignKey(JobExperience, on_delete=models.PROTECT)
     task = models.ForeignKey(Task, on_delete=models.PROTECT)
+
+
+class Message(models.Model):
+    name = models.CharField(max_length=150)
+    email = models.EmailField()
+    subject = models.CharField(max_length=150)
+    message = models.TextField(max_length=600)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-created_at']
+
+    def __str__(self):
+        return f'{self.email} - {self.subject}'

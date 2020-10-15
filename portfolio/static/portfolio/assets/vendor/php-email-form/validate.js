@@ -86,13 +86,14 @@ jQuery(document).ready(function($) {
             }
             break;
         }
-        i.next('.validate').html((ierror ? (i.attr('data-msg') != undefined ? i.attr('data-msg') : 'wrong Input') : '')).show('blind');
+        i.next('.validate').html((ierror ? (i.attr('data-msg') !== undefined ? i.attr('data-msg') : 'wrong Input') : '')).show('blind');
       }
     });
     if (ferror) return false;
     else var str = $(this).serialize();
 
     var this_form = $(this);
+    var form_method = $(this).attr('method');
     var action = $(this).attr('action');
 
     if( ! action ) {
@@ -106,11 +107,11 @@ jQuery(document).ready(function($) {
     this_form.find('.loading').slideDown();
     
     $.ajax({
-      type: "POST",
+      type: form_method,
       url: action,
       data: str,
       success: function(msg) {
-        if (msg == 'OK') {
+        if (msg === 'OK') {
           this_form.find('.loading').slideUp();
           this_form.find('.sent-message').slideDown();
           this_form.find("input:not(input[type=submit]), textarea").val('');

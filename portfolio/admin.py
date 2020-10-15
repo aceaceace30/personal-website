@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Project, About, Skill, Task, JobExperience
+from .models import Project, About, Skill, Task, JobExperience, Message
 
 
 class TaskInline(admin.TabularInline):
@@ -44,4 +44,12 @@ class JobExperienceAdmin(admin.ModelAdmin):
     inlines = (TaskInline, )
     search_fields = ('job_name', 'job_title')
     list_display = ('job_title', 'company', 'ordering', 'active', 'created_at')
+    readonly_fields = ('created_at',)
+
+
+@admin.register(Message)
+class MessageAdmin(admin.ModelAdmin):
+
+    search_fields = ('name', 'email', 'subject')
+    list_display = ('name', 'email', 'subject', 'created_at')
     readonly_fields = ('created_at',)

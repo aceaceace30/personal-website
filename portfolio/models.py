@@ -36,8 +36,19 @@ class Project(models.Model):
     def __str__(self):
         return self.name
 
+    @property
     def get_absolute_url(self):
         return reverse('portfolio:project_details', kwargs={'slug': self.slug})
+
+    @property
+    def get_image_cover(self):
+        image_cover = self.project_images.filter(is_cover=True).first()
+        if not image_cover:
+            image_cover = self.project_images.all().first()
+        try:
+            return image_cover.image.url
+        except AttributeError:
+            return None
 
     def get_previous_or_next_project(self, p_or_n):
         try:

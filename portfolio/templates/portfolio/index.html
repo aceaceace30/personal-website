@@ -165,11 +165,11 @@
                 {% for project in projects %}
                     <div class="col-lg-4 col-md-6 portfolio-item filter-{{ project.classification }}">
                         <div class="portfolio-wrap">
-                            {% if not project.cover %}
+                            {% if project.get_image_cover %}
+                                <img src="{{ project.get_image_cover }}" class="img-fluid" alt="{{ project.name }}">
+                            {% else %}
                                 <img src="{% static 'portfolio/assets/img/coming_soon.png' %}"
                                      class="img-fluid" alt="{{ project.name }}">
-                            {% else %}
-                                <img src="{{ project.cover.url }}" class="img-fluid" alt="{{ project.name }}">
                             {% endif %}
                             <div class="portfolio-links">
                                 <a href="{% if project.cover %}{{ project.cover.url }}{% else %}#{% endif %}"

@@ -13,19 +13,18 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-    services:
-      image: mysql:5.7
-      ports: '3306'
-      options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
     strategy:
       matrix:
         python-version: [3.7, 3.8]
 
     steps:
-    - name: Verify MySQL connection
-      run: |
-          sudo apt-get install -y mysql-client
-          mysql --host 127.0.0.1 --port ${{ job.services.mysql.ports['3306'] }} -uroot -ppassword -e "SHOW DATABASES"
+    - uses: mirromutth/mysql-action@v1.1
+      with:
+        character set server: 'utf8'
+        collation server: 'utf8_general_ci'
+        mysql version: '8.0'
+        mysql database: ${{ secrets.DB_NAME }}
+        mysql user: 'root'
     - uses: actions/checkout@v2
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v2

@@ -14,8 +14,7 @@ jobs:
 
     runs-on: ubuntu-latest
     services:
-      mysql: mysql:5.8
-      ports: '3306'
+      mysql: mysql:5.7
     strategy:
       matrix:
         python-version: [3.7, 3.8]

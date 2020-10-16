@@ -24,7 +24,7 @@ jobs:
         collation server: 'utf8_general_ci'
         mysql version: '8.0'
         mysql database: ${{ secrets.DB_NAME }}
-        mysql user: 'root'
+        mysql root password: 'root'
     - uses: actions/checkout@v2
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v2

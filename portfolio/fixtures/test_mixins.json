@@ -1,0 +1,63 @@
+[
+  {
+    "model": "portfolio.about",
+    "pk": 1,
+    "fields": {
+      "name": "full_name",
+      "value": "Michael Ababao",
+      "created_at": "2020-10-14T08:21:56.573Z"
+    }
+  },
+  {
+    "model": "portfolio.about",
+    "pk": 2,
+    "fields": {
+      "name": "job_title",
+      "value": "Web Developer / Freelancer",
+      "created_at": "2020-10-14T08:22:26.805Z"
+    }
+  },
+  {
+    "model": "portfolio.about",
+    "pk": 3,
+    "fields": {
+      "name": "birthdate",
+      "value": "Nov 30, 1993",
+      "created_at": "2020-10-14T08:22:52.052Z"
+    }
+  },
+  {
+    "model": "portfolio.skill",
+    "pk": 1,
+    "fields": {
+      "name": "HTML",
+      "value": "95",
+      "ordering": 1,
+      "active": true,
+      "created_at": "2020-10-14T08:54:29.518Z"
+    }
+  },
+  {
+    "model": "portfolio.skill",
+    "pk": 2,
+    "fields": {
+      "name": "CSS",
+      "value": "75",
+      "ordering": 2,
+      "active": true,
+      "created_at": "2020-10-14T08:54:38.331Z"
+    }
+  },
+  {
+    "model": "portfolio.jobexperience",
+    "pk": 1,
+    "fields": {
+      "job_title": "PROGRAMMER",
+      "company": "Halcyon Marine Healthcare Systems",
+      "duration": "January 2019 - Present",
+      "ordering": 2,
+      "active": true,
+      "created_at": "2020-10-14T09:28:36.841Z"
+    }
+  }
+]

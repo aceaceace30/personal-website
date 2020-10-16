@@ -1,0 +1,72 @@
+[
+  {
+    "model": "portfolio.project",
+    "pk": 1,
+    "fields": {
+      "name": "Recruitment System",
+      "slug": "recruitment-system",
+      "description": "<p>A project made for the Human Resource Department to help with:</p>\r\n\r\n<p>- Recruitment process&nbsp;<img alt=\"yes\" src=\"http://127.0.0.1:8000/static/ckeditor/ckeditor/plugins/smiley/images/thumbs_up.png\" style=\"height:23px; width:23px\" title=\"yes\" /></p>\r\n\r\n<p>- Monitoring of requirements&nbsp;<img alt=\"yes\" src=\"http://127.0.0.1:8000/static/ckeditor/ckeditor/plugins/smiley/images/thumbs_up.png\" style=\"height:23px; width:23px\" title=\"yes\" /></p>\r\n\r\n<p>- Generation of reports&nbsp;<img alt=\"yes\" src=\"http://127.0.0.1:8000/static/ckeditor/ckeditor/plugins/smiley/images/thumbs_up.png\" style=\"height:23px; width:23px\" title=\"yes\" /></p>\r\n\r\n<p>- Survey monitoring result&nbsp;<img alt=\"yes\" src=\"http://127.0.0.1:8000/static/ckeditor/ckeditor/plugins/smiley/images/thumbs_up.png\" style=\"height:23px; width:23px\" title=\"yes\" /></p>\r\n\r\n<p>- Sending of email and SMS notifications&nbsp;<img alt=\"yes\" src=\"http://127.0.0.1:8000/static/ckeditor/ckeditor/plugins/smiley/images/thumbs_up.png\" style=\"height:23px; width:23px\" title=\"yes\" /></p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>This is my first company project made with Django. I&#39;ve learned a lot about the framework, things&nbsp;like:</p>\r\n\r\n<p>- CBV</p>\r\n\r\n<p>- Django Custom Commands</p>\r\n\r\n<p>- Splitting settings file</p>\r\n\r\n<p>- Different Django Packages</p>\r\n\r\n<p>Deployed in CentOS 6 with Nginx and Gunicorn. Implemented server-side processing for <a href=\"https://datatables.net/\">DataTables </a>for huge amounts of data.</p>",
+      "back_end": "Python 3.6, Django 2.2",
+      "front_end": "Bootstrap 4, Jquery, DataTables",
+      "classification": "company",
+      "git_link": null,
+      "website_link": null,
+      "ordering": 1,
+      "created_at": "2020-10-15T15:18:46.100Z"
+    }
+  },
+  {
+    "model": "portfolio.project",
+    "pk": 2,
+    "fields": {
+      "name": "Document Management",
+      "slug": "document-management",
+      "description": "<p>Project for the Quality Assurance Department to help manage their daily tasks.</p>\r\n\r\n<p>This project is pretty challenging since it was more on PDF Documents but it was fun since you could automate so much stuff with writing, modifying, and merging PDFs using python.&nbsp;I was exposed to different PDF Libraries available for python like:</p>\r\n\r\n<p>-&nbsp;<a href=\"https://pypi.org/project/reportlab/\">reportlab</a>&nbsp;</p>\r\n\r\n<p>- <a href=\"https://pythonhosted.org/PyPDF2/\">PyPDF2</a></p>\r\n\r\n<p>- <a href=\"https://xhtml2pdf.readthedocs.io/en/latest/format_html.html\">xhtml2pdf</a></p>\r\n\r\n<p>Created an integration with the Internal Chat application(<a href=\"https://rocket.chat/\">Rocketchat</a>) to push notification using their API.</p>",
+      "back_end": "Python 3.6, Django 2.2",
+      "front_end": "Bootstrap 4, Jquery, DataTables",
+      "classification": "company",
+      "git_link": null,
+      "website_link": null,
+      "ordering": 2,
+      "created_at": "2020-10-15T15:19:44.089Z"
+    }
+  },
+  {
+    "model": "portfolio.project",
+    "pk": 3,
+    "fields": {
+      "name": "Daily Task",
+      "slug": "daily-task",
+      "description": "<p>The project is simply made to track the task of work from home employees during the COVID pandemic.</p>\r\n\r\n<p>Key Features:</p>\r\n\r\n<p>1. CRUD for employees&#39; tasks.</p>\r\n\r\n<p>2. Add attachments for each activity.</p>\r\n\r\n<p>3. Managers can monitor tasks of employees under supervision.</p>\r\n\r\n<p>4. HR Team can the tasks of all employees.</p>\r\n\r\n<p>5. Generate reports with Excel.</p>",
+      "back_end": "Python 3.6, Django 2.2",
+      "front_end": "Bootstrap 4, DataTables",
+      "classification": "company",
+      "git_link": null,
+      "website_link": null,
+      "ordering": 3,
+      "created_at": "2020-10-15T15:20:34.119Z"
+    }
+  },
+  {
+    "model": "portfolio.projectimage",
+    "pk": 1,
+    "fields": {
+      "project": 1,
+      "image": "test_path/test_image1.png",
+      "description": "test_description",
+      "is_cover": true,
+      "created_at": "2020-10-15T15:18:46.100Z"
+    }
+  },
+  {
+    "model": "portfolio.projectimage",
+    "pk": 2,
+    "fields": {
+      "project": 1,
+      "image": "test_path/test_image2.png",
+      "description": "test_description",
+      "is_cover": false,
+      "created_at": "2020-10-15T15:18:46.100Z"
+    }
+  }
+]

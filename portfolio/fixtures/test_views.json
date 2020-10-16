@@ -1,0 +1,34 @@
+[
+  {
+    "model": "portfolio.project",
+    "pk": 1,
+    "fields": {
+      "name": "Qoute Generator",
+      "slug": "qoute-generator",
+      "description": "<p>Personal project to better understand&nbsp;python&#39;s requests library and manipulating Restful APIs.</p>",
+      "back_end": "Python 3.7, Django 3.0",
+      "front_end": "CSS3",
+      "classification": "personal",
+      "git_link": "https://github.com/aceaceace30/Random-Qoute-Generator",
+      "website_link": "http://aceaceace303030.pythonanywhere.com/",
+      "ordering": 1,
+      "created_at": "2020-10-15T15:21:20.274Z"
+    }
+  },
+  {
+    "model": "portfolio.project",
+    "pk": 2,
+    "fields": {
+      "name": "Inventory Management System",
+      "slug": "inventory-management-system",
+      "description": "<p>Inventory Management Project for Microsphere Systems Technology.</p>\r\n\r\n<p>This is my second freelance project created with Django, Datatable, and Jquery.</p>\r\n\r\n<p>Key Features:</p>\r\n\r\n<p>1. Management of Computer Inventory.</p>\r\n\r\n<p>2. Historical Data of each row data.</p>\r\n\r\n<p>2. Schedule&nbsp;and monitoring of preventive maintenance.</p>\r\n\r\n<p>3. Web view for clients.</p>\r\n\r\n<p>4. History of changes for units.</p>\r\n\r\n<p>5. Email client notification.</p>\r\n\r\n<p>6. Generation of reports for PDF and Excel.</p>",
+      "back_end": "Python 3.7, Django 2.2",
+      "front_end": "Bootstrap 4, Jquery, DataTables",
+      "classification": "freelance",
+      "git_link": "https://github.com/aceaceace30/microsphere",
+      "website_link": null,
+      "ordering": 2,
+      "created_at": "2020-10-15T15:22:00.757Z"
+    }
+  }
+]

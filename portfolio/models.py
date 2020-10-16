@@ -52,9 +52,9 @@ class Project(models.Model):
 
     def get_previous_or_next_project(self, p_or_n):
         try:
-            if p_or_n == 'p':
+            if p_or_n == 'previous':
                 return Project.objects.get(ordering=self.ordering-1)
-            elif p_or_n == 'n':
+            elif p_or_n == 'next':
                 return Project.objects.get(ordering=self.ordering+1)
         except self.DoesNotExist:
             return None

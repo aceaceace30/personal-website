@@ -126,6 +126,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
+RESUME_PATH = 'media/resume/CV-Michael-Jay-Pery-Ababao.pdf'
 
 # Email settings
 

@@ -1,3 +1,5 @@
+from django.conf import settings
+
 from portfolio.models import About, Skill, JobExperience
 
 
@@ -7,10 +9,13 @@ class InformationMixin:
     """
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['resume_path'] = 'media/resume/CV-Michael-Jay-Pery-Ababao.pdf'
-        context = self.add_info(context)
-        context = self.add_skills(context)
-        context = self.add_job_experience(context)
+        context['resume_path'] = settings.RESUME_PATH
+        try:
+            context = self.add_info(context)
+            context = self.add_skills(context)
+            context = self.add_job_experience(context)
+        except KeyError:
+            pass
         return context
 
     @staticmethod

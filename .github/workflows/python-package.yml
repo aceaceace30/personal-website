@@ -29,10 +29,10 @@ jobs:
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
     - name: Set env variables
       env:
-        SECRET_KEY: &5shu3839w7atvxn&a5fp#*nshh+6f(4aai+51@v0p0h3^l1-1
         EMAIL_HOST_USER: test@domain.com
         EMAIL_HOST_PASSWORD: t3st1234
         EMAIL_ADMIN: test_admin@test.com
+        SECRET_KEY: '&5shu3839w7atvxn&a5fp#*nshh+6f(4aai+51@v0p0h3^l1-1'
     - name: Run python manage.py test
       run: |
         python manage.py test

@@ -37,7 +37,7 @@ jobs:
         DEBUG: ${{ secrets.DEBUG }}
         DB_NAME: ${{ secrets.DB_NAME }}
         DB_USER: root
-        DB_PASS: ''
+        DB_PASS: root
         DB_HOST: localhost
         DB_PORT: ${{ secrets.DB_PORT }}
         EMAIL_HOST_USER: ${{ secrets.EMAIL_HOST_USER }}

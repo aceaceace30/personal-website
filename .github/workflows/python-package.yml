@@ -33,7 +33,6 @@ jobs:
         EMAIL_HOST_USER: test@domain.com
         EMAIL_HOST_PASSWORD: t3st1234
         EMAIL_ADMIN: test_admin@test.com
-        
     - name: Run python manage.py test
       run: |
         python manage.py test

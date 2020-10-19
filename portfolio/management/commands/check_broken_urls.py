@@ -17,11 +17,13 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         for url in self.get_website_urls():
+            print(f'Scrapping data for url: {url}')
             page = requests.get(url)
             self.get_broken_links(page.content)
 
         self.html_message += '</ul>'
 
+        print(f'Broken links found: {self.broken_links}')
         if self.broken_links:
             send_mail(
                 'List of broken links on the website.',

@@ -1,5 +1,9 @@
+from django.conf import settings
 from django.contrib import admin
-from .models import Project, About, Skill, Task, JobExperience, Message, ProjectImage
+from django.core.mail import send_mail
+from django.template.loader import render_to_string
+
+from .models import Project, About, Skill, Task, JobExperience, Message, ProjectImage, Testimonial
 
 
 class TaskInline(admin.TabularInline):
@@ -51,6 +55,15 @@ class JobExperienceAdmin(admin.ModelAdmin):
     inlines = (TaskInline,)
     search_fields = ('job_name', 'job_title')
     list_display = ('job_title', 'company', 'ordering', 'active', 'created_at')
+    readonly_fields = ('created_at',)
+
+
+@admin.register(Testimonial)
+class TestimonialAdmin(admin.ModelAdmin):
+
+    search_fields = ('name', 'platform', 'email')
+    list_filter = ('is_answered',)
+    list_display = ('name', 'platform', 'email', 'hash_key', 'is_answered', 'active', 'created_at')
     readonly_fields = ('created_at',)
 
 

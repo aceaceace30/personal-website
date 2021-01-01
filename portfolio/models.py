@@ -1,10 +1,14 @@
 import os
+import uuid
 
 from datetime import date, datetime
 
 from ckeditor.fields import RichTextField
+from django.conf import settings
+from django.core.mail import send_mail
 from django.core.paginator import Paginator
 from django.db import models
+from django.template.loader import render_to_string
 from django.urls import reverse
 
 
@@ -147,6 +151,48 @@ class JobExperience(models.Model):
 class JobExperienceTask(models.Model):
     job_experience = models.ForeignKey(JobExperience, on_delete=models.PROTECT)
     task = models.ForeignKey(Task, on_delete=models.PROTECT)
+
+    def __str__(self):
+        return f'{self.job_experience} | {self.task}'
+
+
+class Testimonial(models.Model):
+    name = models.CharField(max_length=50, null=True, blank=True)
+    positive_remarks = models.TextField(null=True, blank=True)
+    improvement_remarks = models.TextField(null=True, blank=True, verbose_name='Remarks on what needs to be improve')
+    email = models.EmailField()
+    platform = models.CharField(max_length=60)
+    project_description = models.CharField(max_length=75)
+    project_year = models.IntegerField(null=True, blank=True)
+
+    hash_key = models.UUIDField(default=uuid.uuid4, editable=False)
+    is_answered = models.BooleanField(default=False)
+    active = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-created_at']
+
+    def __str__(self):
+        return f'{self.name} - {self.email} - {self.platform}'
+
+    @property
+    def link(self):
+        return os.path.join(settings.DOMAIN_NAME, str(self.hash_key))
+
+    def save(self, **kwargs):
+        """Override save method to send email on initial creation"""
+        if not self.pk:
+            subject = 'Testimonial for further improvement'
+            message = render_to_string('email_templates/testimonial_message.html', context={'testi': self})
+            send_mail(
+                subject,
+                message,
+                settings.EMAIL_HOST_USER,
+                [self.email],
+                fail_silently=False
+            )
+        super().save(**kwargs)
 
 
 class Message(models.Model):

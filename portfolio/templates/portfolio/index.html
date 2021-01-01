@@ -186,6 +186,30 @@
         </div>
     </section><!-- End Portfolio Section -->
 
+    <!-- ======= Testimonials Section ======= -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>Testimonials</h2>
+            </div>
+
+            <div class="row" data-aos="fade-in">
+                {% for testi in testimonials %}
+                    <div class="col-lg-4">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5 class="font-italic">"{{ testi.positive_remarks }}"</h5>
+                                <small>
+                                    {{ testi.name }} from {{ testi.platform }} | {{ testi.created_at|date:"M d, Y" }}
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section><!-- End Contact Section -->
+
     <!-- ======= Contact Section ======= -->
     <section id="contact" class="contact">
         <div class="container">
@@ -243,7 +267,7 @@
                         </div>
                         <div class="form-group">
                             <label for="message">Message</label>
-                            <textarea class="form-control" name="message" rows="10" data-rule="required"
+                            <textarea class="form-control" name="message" id="message" rows="10" data-rule="required"
                                       data-msg="Please write something for us"></textarea>
                             <div class="validate"></div>
                         </div>

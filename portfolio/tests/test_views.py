@@ -88,7 +88,10 @@ class TestViews(TestCase):
 
     def test_testimonial_update_view_post(self):
         """
-        Asserts that TestimonialUpdateView returns status 200
+        Asserts that TestimonialUpdateView is working properly
+        - positive_remarks, improvement_remarks has been updated
+        - is_answered field is set to True
+        - Permission Denied is raised after the update has been saved
         :return: 
         """
         hash_key = '10722bf8-8a81-4e2c-8bf6-9836006052ec'
@@ -102,3 +105,7 @@ class TestViews(TestCase):
         testimonial = Testimonial.objects.get(hash_key=hash_key)
         self.assertEqual('Test Positive Remarks', testimonial.positive_remarks)
         self.assertEqual('Test Improvement Remarks', testimonial.improvement_remarks)
+        self.assertTrue(testimonial.is_answered)
+
+        response = self.client.get(url)
+        self.assertEqual(403, response.status_code)

@@ -1,6 +1,6 @@
 from django.conf import settings
 
-from portfolio.models import About, Skill, JobExperience
+from portfolio.models import About, Skill, JobExperience, Testimonial
 
 
 class InformationMixin:
@@ -10,6 +10,7 @@ class InformationMixin:
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['resume_path'] = settings.RESUME_PATH
+        context['testimonials'] = Testimonial.objects.filter(active=True)
         try:
             context = self.add_info(context)
             context = self.add_skills(context)

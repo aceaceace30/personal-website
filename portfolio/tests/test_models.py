@@ -3,6 +3,8 @@ from unittest.mock import patch
 
 from django.conf import settings
 from django.test import TestCase
+from django.urls import reverse
+
 from portfolio.models import Project, Testimonial
 
 
@@ -38,8 +40,10 @@ class TestProjectModel(TestCase):
         Test link method returns correct url
         :return:
         """
-        testimonial = Testimonial.objects.get(hash_key='10722bf8-8a81-4e2c-8bf6-9836006052ec')
-        expected_url = os.path.join(settings.DOMAIN_NAME, str(testimonial.hash_key))
+        hash_key = '10722bf8-8a81-4e2c-8bf6-9836006052ec'
+        testimonial = Testimonial.objects.get(hash_key=hash_key)
+        path = reverse('client_comment_form', kwargs={'hash_key': hash_key})
+        expected_url = os.path.join(settings.DOMAIN_NAME, path)
 
         self.assertEqual(expected_url, testimonial.link)
 

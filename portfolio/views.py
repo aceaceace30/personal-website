@@ -1,10 +1,12 @@
 from django.conf import settings
 from django.core.mail import send_mail
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse_lazy
+from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import ListView, DetailView, UpdateView, TemplateView
 
+from .decorators import check_if_testimonial_is_answered
 from .mixins import InformationMixin
 from .models import Project, Message, Testimonial
 
@@ -27,6 +29,7 @@ class ProjectDetailView(InformationMixin, DetailView):
         return context
 
 
+@method_decorator(check_if_testimonial_is_answered, name='dispatch')
 class TestimonialUpdateView(UpdateView):
     template_name = 'portfolio/client_comment_form.html'
     model = Testimonial
@@ -34,6 +37,14 @@ class TestimonialUpdateView(UpdateView):
     slug_field = 'hash_key'
     slug_url_kwarg = 'hash_key'
     success_url = reverse_lazy('thank_you')
+
+    def form_valid(self, form):
+        """Override form_valid to update the is_answered field"""
+        self.object = form.save(commit=False)
+        self.object.is_answered = True
+        self.object.save()
+
+        return HttpResponseRedirect(self.get_success_url())
 
 
 class ThankYouView(TemplateView):

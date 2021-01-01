@@ -3,7 +3,7 @@ from unittest.mock import patch
 from django.test import TestCase
 from django.urls import reverse
 
-from portfolio.models import Message
+from portfolio.models import Message, Testimonial
 
 
 class TestViews(TestCase):
@@ -42,6 +42,16 @@ class TestViews(TestCase):
         response = self.client.get(url)
         self.assertEqual(404, response.status_code)
 
+    def test_thankyou_view_status_200(self):
+        """
+        Asserts that thank you page is working
+        :return:
+        """
+        url = reverse('thank_you')
+        response = self.client.get(url)
+
+        self.assertEqual(200, response.status_code)
+
     def test_send_message(self):
         """
         Asserts that send_message is working properly
@@ -66,3 +76,29 @@ class TestViews(TestCase):
             self.assertTrue(Message.objects.filter(name='test_name').exists())
             self.assertTrue(mock_send_mail.called)
 
+    def test_testimonial_update_view_status_200(self):
+        """
+        Asserts that TestimonialUpdateView returns status 200
+        :return:
+        """
+        url = reverse('client_comment_form', kwargs={'hash_key': '10722bf8-8a81-4e2c-8bf6-9836006052ec'})
+        response = self.client.get(url)
+
+        self.assertEqual(200, response.status_code)
+
+    def test_testimonial_update_view_post(self):
+        """
+        Asserts that TestimonialUpdateView returns status 200
+        :return: 
+        """
+        hash_key = '10722bf8-8a81-4e2c-8bf6-9836006052ec'
+        url = reverse('client_comment_form', kwargs={'hash_key': hash_key})
+        data = {
+            'positive_remarks': 'Test Positive Remarks',
+            'improvement_remarks': 'Test Improvement Remarks',
+        }
+        self.client.post(url, data=data)
+
+        testimonial = Testimonial.objects.get(hash_key=hash_key)
+        self.assertEqual('Test Positive Remarks', testimonial.positive_remarks)
+        self.assertEqual('Test Improvement Remarks', testimonial.improvement_remarks)

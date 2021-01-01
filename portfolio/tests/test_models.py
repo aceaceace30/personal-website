@@ -1,5 +1,9 @@
+import os
+from unittest.mock import patch
+
+from django.conf import settings
 from django.test import TestCase
-from portfolio.models import Project, About
+from portfolio.models import Project, Testimonial
 
 
 class TestProjectModel(TestCase):
@@ -28,3 +32,34 @@ class TestProjectModel(TestCase):
         self.assertEqual(project2, project1.get_previous_or_next_project('next'))
         self.assertEqual(project2, project3.get_previous_or_next_project('previous'))
         self.assertIsNone(project1.get_previous_or_next_project('previous'))
+
+    def test_link_property(self):
+        """
+        Test link method returns correct url
+        :return:
+        """
+        testimonial = Testimonial.objects.get(hash_key='10722bf8-8a81-4e2c-8bf6-9836006052ec')
+        expected_url = os.path.join(settings.DOMAIN_NAME, str(testimonial.hash_key))
+
+        self.assertEqual(expected_url, testimonial.link)
+
+    def test_testimonial_save(self):
+        """
+        Test creation of testimonial calls send_mail and updating does not
+        :return:
+        """
+        with patch('portfolio.models.send_mail') as patch_send_mail:
+            testimonial = Testimonial()
+            testimonial.name = 'Test Name'
+            testimonial.email = 'test@email.com'
+            testimonial.platform = 'test platform'
+            testimonial.project_description = 'new project'
+            testimonial.active = True
+            testimonial.save()
+            patch_send_mail.assert_called_once()
+
+        with patch('portfolio.models.send_mail') as patch_send_mail:
+            testimonial = Testimonial.objects.get(email='test@email.com')
+            testimonial.positive_remarks = 'Test Positive Remarks'
+            testimonial.save()
+            patch_send_mail.assert_not_called()

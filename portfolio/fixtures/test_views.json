@@ -30,5 +30,20 @@
       "ordering": 2,
       "created_at": "2020-10-15T15:22:00.757Z"
     }
+  },
+  {
+    "model": "portfolio.testimonial",
+    "pk": 1,
+    "fields": {
+      "name": "John Doe",
+      "positive_remarks": "Very Good",
+      "email": "johndoe@test.com",
+      "platform": "Test Platform",
+      "project_description": "Everything but cheese",
+      "project_year": 2020,
+      "hash_key": "10722bf8-8a81-4e2c-8bf6-9836006052ec",
+      "active": true,
+      "created_at": "2020-10-14T09:28:36.841Z"
+    }
   }
 ]

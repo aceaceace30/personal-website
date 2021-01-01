@@ -108,4 +108,4 @@ class TestViews(TestCase):
         self.assertTrue(testimonial.is_answered)
 
         response = self.client.get(url)
-        self.assertEqual(403, response.status_code)
+        self.assertEqual(302, response.status_code)

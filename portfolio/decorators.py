@@ -1,5 +1,5 @@
 from functools import wraps
-from django.core.exceptions import PermissionDenied
+from django.shortcuts import redirect
 
 from portfolio.models import Testimonial
 
@@ -11,7 +11,7 @@ def check_if_testimonial_is_answered(function):
         if testimonial.is_answered is False:
             return function(request, *args, **kwargs)
 
-        raise PermissionDenied
+        return redirect('portfolio:homepage')
 
     return wrap
 

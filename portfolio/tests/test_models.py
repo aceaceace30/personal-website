@@ -1,4 +1,3 @@
-import os
 from unittest.mock import patch
 
 from django.conf import settings
@@ -43,7 +42,7 @@ class TestProjectModel(TestCase):
         hash_key = '10722bf8-8a81-4e2c-8bf6-9836006052ec'
         testimonial = Testimonial.objects.get(hash_key=hash_key)
         path = reverse('client_comment_form', kwargs={'hash_key': hash_key})
-        expected_url = os.path.join(settings.DOMAIN_NAME, path)
+        expected_url = settings.DOMAIN_NAME + path
 
         self.assertEqual(expected_url, testimonial.link)
 

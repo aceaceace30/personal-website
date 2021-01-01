@@ -179,7 +179,7 @@ class Testimonial(models.Model):
     @property
     def link(self):
         path = reverse('client_comment_form', kwargs={'hash_key': str(self.hash_key)})
-        return os.path.join(settings.DOMAIN_NAME, path)
+        return settings.DOMAIN_NAME + path
 
     def save(self, **kwargs):
         """Override save method to send email on initial creation"""

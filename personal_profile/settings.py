@@ -28,6 +28,7 @@ INSTALLED_APPS = [
 
     # packages
     'ckeditor',
+    'crispy_forms',
 
     # django built-ins
     'django.contrib.admin',
@@ -139,3 +140,5 @@ EMAIL_PORT = 587
 EMAIL_ADMIN = env.str('EMAIL_ADMIN')
 
 DOMAIN_NAME = env.str('DOMAIN_NAME')
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'

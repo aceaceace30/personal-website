@@ -11,7 +11,6 @@ class InformationMixin:
         context = super().get_context_data(**kwargs)
         context['resume_path'] = settings.RESUME_PATH
         context['project_repo_link'] = settings.PROJECT_REPO_LINK
-        context['browsable_api'] = settings.DOMAIN_NAME + '/api/v1/'
         context['testimonials'] = Testimonial.objects.filter(active=True)
         try:
             context = self.add_info(context)

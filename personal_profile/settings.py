@@ -29,6 +29,8 @@ INSTALLED_APPS = [
     # packages
     'ckeditor',
     'crispy_forms',
+    'rest_framework',
+    'django_filters',
 
     # django built-ins
     'django.contrib.admin',
@@ -138,7 +140,14 @@ EMAIL_HOST_PASSWORD = env.str('EMAIL_HOST_PASSWORD')
 EMAIL_PORT = 587
 
 EMAIL_ADMIN = env.str('EMAIL_ADMIN')
-
 DOMAIN_NAME = env.str('DOMAIN_NAME')
+PROJECT_REPO_LINK = 'https://github.com/aceaceace30/portfolio'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+REST_FRAMEWORK = {
+    ''
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 10,
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
+}

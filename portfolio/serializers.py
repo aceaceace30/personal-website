@@ -1,3 +1,7 @@
+import os
+
+from django.conf import settings
+from django.urls import reverse
 from rest_framework import serializers
 from portfolio.models import (
     About, Project, ProjectImage, Skill,
@@ -12,19 +16,26 @@ class AboutSerializer(serializers.ModelSerializer):
 
 
 class ProjectImageSerializer(serializers.ModelSerializer):
+    project = serializers.SlugRelatedField(slug_field='slug', queryset=Project.objects.all())
+
     class Meta:
         model = ProjectImage
-        fields = '__all__'
+        fields = ['project', 'image', 'description', 'is_cover']
 
 
 class ProjectSerializer(serializers.ModelSerializer):
     project_images = ProjectImageSerializer(read_only=True, many=True)
+    next_project_url = serializers.ReadOnlyField(source='next_project')
+    previous_project_url = serializers.ReadOnlyField(source='previous_project')
 
     class Meta:
         model = Project
-        fields = ['name', 'slug', 'description', 'back_end',
-                  'front_end', 'classification', 'git_link',
-                  'website_link', 'project_images']
+        fields = ['url', 'name', 'slug', 'description', 'back_end', 'front_end',
+                  'classification', 'git_link', 'website_link', 'ordering',
+                  'next_project_url', 'previous_project_url', 'project_images']
+        extra_kwargs = {
+            'url': {'view_name': 'api:project-detail', 'lookup_field': 'slug'}
+        }
 
 
 class SkillSerializer(serializers.ModelSerializer):

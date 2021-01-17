@@ -54,7 +54,7 @@ class Project(models.Model):
         except AttributeError:
             return None
 
-    def next_project(self, as_url_path=False) -> object or str:
+    def next_project(self, as_url_path=True) -> object or str:
         """
         Returns next project object or url path. Defaults as_url_path to true to ease use on
         serializers.ReadOnlyField to also use this method, might be better to default this to false

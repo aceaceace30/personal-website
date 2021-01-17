@@ -54,13 +54,35 @@ class Project(models.Model):
         except AttributeError:
             return None
 
-    def get_previous_or_next_project(self, p_or_n):
+    def next_project(self, as_url_path=False) -> object or str:
+        """
+        Returns next project object or url path. Defaults as_url_path to true to ease use on
+        serializers.ReadOnlyField to also use this method, might be better to default this to false
+        if there is a way to pass keyword args on the ReadOnlyField
+        :param as_url_path: Boolean to return object or url path
+        """
         try:
-            if p_or_n == 'previous':
-                return Project.objects.get(ordering=self.ordering-1)
-            elif p_or_n == 'next':
-                return Project.objects.get(ordering=self.ordering+1)
-        except self.DoesNotExist:
+            project = Project.objects.get(ordering=self.ordering + 1)
+            if not as_url_path:
+                return project
+            return settings.DOMAIN_NAME + reverse('api:project-detail', kwargs={'slug': project.slug})
+        except Project.DoesNotExist:
+            return None
+
+    def previous_project(self, as_url_path=True) -> object or str:
+        """
+        Returns previous project object or url path. Defaults as_url_path to true to ease use on
+        serializers.ReadOnlyField to also use this method, might be better to default this to false
+        if there is a way to pass keyword args on the ReadOnlyField
+        :param as_url_path: Boolean to return object or url path
+        :return:
+        """
+        try:
+            project = Project.objects.get(ordering=self.ordering-1)
+            if not as_url_path:
+                return project
+            return settings.DOMAIN_NAME + reverse('api:project-detail', kwargs={'slug': project.slug})
+        except Project.DoesNotExist:
             return None
 
 
@@ -94,13 +116,13 @@ class About(models.Model):
         return self.name
 
     @staticmethod
-    def get_age(birthdate):
+    def get_age(birthdate) -> int:
         try:
             birthdate = datetime.strptime(birthdate, '%b %d, %Y')
             today = date.today()
             return today.year - birthdate.year - ((today.month, today.day) < (birthdate.month, birthdate.day))
         except ValueError:
-            return '----'
+            raise ValueError(f'Invalid birthdate format: {birthdate}. Should be m/dd/yyyy (Ex: Nov 30, 1993)')
 
 
 class Skill(models.Model):

@@ -1,6 +1,7 @@
 from unittest.mock import patch
 
 from django.conf import settings
+from django.template.loader import render_to_string
 from django.test import TestCase
 from django.urls import reverse
 
@@ -20,19 +21,18 @@ class TestProjectModel(TestCase):
         project = Project.objects.get(slug='recruitment-system')
         self.assertEqual('/media/test_path/test_image1.png', project.get_image_cover)
 
-    def test_get_previous_or_next_project(self):
+    def test_next_project_and_previous_project(self):
         """
-        Test get_previous_or_next_project method returns
-        previous or next project
+        Test next_project and previous_project property methods returns correct project
         :return:
         """
         project1 = Project.objects.get(slug='recruitment-system')
         project2 = Project.objects.get(slug='document-management')
         project3 = Project.objects.get(slug='daily-task')
 
-        self.assertEqual(project2, project1.get_previous_or_next_project('next'))
-        self.assertEqual(project2, project3.get_previous_or_next_project('previous'))
-        self.assertIsNone(project1.get_previous_or_next_project('previous'))
+        self.assertEqual(project2, project1.next_project(as_url_path=False))
+        self.assertEqual(project2, project3.previous_project(as_url_path=False))
+        self.assertIsNone(project1.previous_project(as_url_path=False))
 
     def test_link_property(self):
         """
@@ -59,7 +59,11 @@ class TestProjectModel(TestCase):
             testimonial.project_description = 'new project'
             testimonial.active = True
             testimonial.save()
-            patch_send_mail.assert_called_once()
+
+            subject = 'Request for feedback'
+            message = render_to_string('email_templates/testimonial_message.html', context={'testi': testimonial})
+            patch_send_mail.assert_called_once_with(subject, '', settings.EMAIL_HOST_USER, [testimonial.email],
+                                                    html_message=message, fail_silently=False)
 
         with patch('portfolio.models.send_mail') as patch_send_mail:
             testimonial = Testimonial.objects.get(email='test@email.com')

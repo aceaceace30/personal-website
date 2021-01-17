@@ -24,8 +24,8 @@ class ProjectDetailView(InformationMixin, DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['next_project'] = self.get_object().get_previous_or_next_project('next')
-        context['previous_project'] = self.get_object().get_previous_or_next_project('previous')
+        context['next_project'] = self.get_object().next_project(as_url_path=False)
+        context['previous_project'] = self.get_object().previous_project(as_url_path=False)
         return context
 
 

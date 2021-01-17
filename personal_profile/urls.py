@@ -10,11 +10,11 @@ from rest_framework import routers
 
 
 router = routers.DefaultRouter()
-router.register(r'about', api_views.AboutViewSet)
-router.register(r'project', api_views.ProjectViewSet)
-router.register(r'skill', api_views.SkillViewSet)
-router.register(r'job-experience', api_views.JobExperienceViewSet)
-router.register(r'testimonial', api_views.TestimonialViewSet)
+router.register(r'about', api_views.AboutViewSet, basename='about')
+router.register(r'project', api_views.ProjectViewSet, basename='project')
+router.register(r'skill', api_views.SkillViewSet, basename='skill')
+router.register(r'job-experience', api_views.JobExperienceViewSet, basename='job-experience')
+router.register(r'testimonial', api_views.TestimonialViewSet, basename='testimonial')
 
 
 urlpatterns = [
@@ -25,7 +25,7 @@ urlpatterns = [
 ]
 
 urlpatterns += [
-    path('api/v1/', include(router.urls)),
+    path('api/v1/', include((router.urls, 'portfolio'), namespace='api')),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ]
 

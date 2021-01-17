@@ -1,6 +1,5 @@
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import viewsets
-from rest_framework import permissions
 from rest_framework.filters import OrderingFilter, SearchFilter
 
 from portfolio.models import About, Project, Skill, JobExperience, Testimonial
@@ -27,6 +26,7 @@ class ProjectViewSet(viewsets.ReadOnlyModelViewSet):
     filter_backends = [OrderingFilter, DjangoFilterBackend]
     ordering_fields = ['name', 'slug', 'classification']
     filterset_fields = ['name', 'slug', 'classification']
+    lookup_field = 'slug'
 
 
 class SkillViewSet(viewsets.ReadOnlyModelViewSet):

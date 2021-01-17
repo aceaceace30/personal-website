@@ -1,5 +1,3 @@
-from unittest.mock import patch
-
 from django.conf import settings
 from django.test import TestCase, RequestFactory
 from django.urls import reverse

@@ -62,7 +62,7 @@ class Project(models.Model):
         :param as_url_path: Boolean to return object or url path
         """
         try:
-            project = Project.objects.get(ordering=self.ordering + 1)
+            project = Project.objects.get(ordering=self.ordering+1)
             if not as_url_path:
                 return project
             return settings.DOMAIN_NAME + reverse('api:project-detail', kwargs={'slug': project.slug})

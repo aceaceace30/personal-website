@@ -67,7 +67,7 @@
                 <li><a href="{% url 'portfolio:homepage' %}#testimonials"><i class="bx bx-comment"></i> Testimonials</a></li>
                 <li><a href="{% url 'portfolio:homepage' %}#contact"><i class="bx bxs-contact"></i> Contact</a></li>
                 <li><a href="{{ project_repo_link }}" target="_blank"><i class="bx bx-code"></i> Project Code</a></li>
-                <li><a href="{{ browsable_api }}" target="_blank"><i class="bx bx-search"></i> Browsable API</a></li>
+                <li><a href="{% url 'api:api-root' %}" target="_blank"><i class="bx bx-search"></i> Browsable API</a></li>
             </ul>
         </nav><!-- .nav-menu -->
         <button type="button" class="mobile-nav-toggle d-xl-none"><i class="icofont-navigation-menu"></i></button>

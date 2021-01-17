@@ -41,6 +41,3 @@ class TestMixin(TestCase):
                          context['job_experiences'][0].job_title)
         self.assertEqual(Testimonial.objects.get(hash_key='10722bf8-8a81-4e2c-8bf6-9836006052ec').name,
                          context['testimonials'][0].name)
-
-
-

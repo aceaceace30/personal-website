@@ -117,7 +117,8 @@ class Skill(models.Model):
         return self.name
 
     @staticmethod
-    def get_splitted_skill_set():
+    def get_splitted_skill_set() -> Paginator.page:
+        """Splits Skills by 2"""
         skills = Skill.objects.filter(active=True)
         paginator = Paginator(skills, skills.count() / 2)
         return paginator.page(1), paginator.page(2)
@@ -177,7 +178,8 @@ class Testimonial(models.Model):
         return f'{self.name} - {self.email} - {self.platform}'
 
     @property
-    def link(self):
+    def link(self) -> str:
+        """Returns URL to client comment form. Example: http://test.com/client-comment-form/ad23-qwe1/"""
         path = reverse('client_comment_form', kwargs={'hash_key': str(self.hash_key)})
         return settings.DOMAIN_NAME + path
 

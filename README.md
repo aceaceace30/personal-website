@@ -1,4 +1,4 @@
-<img src="./personal-website/portfolio/static/portfolio/assets/img/favicon.png" alt="Site Logo" align="right">
+<img src="./portfolio/static/portfolio/assets/img/favicon.png" alt="Site Logo" align="right">
 
 # Personal Website 
 > http://acedev30.pythonanywhere.com
@@ -9,10 +9,6 @@ Python 3.7, Django 3.1.2, Django Rest Framework 3.12.2, MySQL, Bootstrap, Jquery
 
 ### Prerequisites
 Python, MySQL
-
-## Style guide
-
-Explain your code style and show how to check it.
 
 ## Api Reference
 

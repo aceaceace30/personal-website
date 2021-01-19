@@ -3,6 +3,8 @@ from rest_framework.test import APILiveServerTestCase
 
 from model_bakery import baker
 
+from portfolio.models import Project
+
 
 class APIEndpointsTestCase(APILiveServerTestCase):
     """Tests for API endpoints. Break this down to separate classes or files if the endpoints grows large"""
@@ -45,7 +47,61 @@ class APIEndpointsTestCase(APILiveServerTestCase):
         self.assertEqual(about.value, response.data['results'][0]['value'])
 
     def test_project_endpoint(self):
-        """Todo: Add test for project endpoint"""
+        """Asserts that plain project endpoint is working"""
+        baker.make('Project', 20)
+
+        url = reverse('api:project-list')
+        response = self.client.get(url)
+        result = response.data['results']
+
+        fields_to_check = ['name', 'slug', 'description', 'back_end', 'front_end',
+                           'classification', 'git_link', 'website_link', 'ordering']
+
+        self.assertEqual(200, response.status_code)
+        self.assertEqual(10, len(result))  # check if pagination is working
+
+        # check if all retrieved values are the same
+        project_qs = Project.objects.all().values()[:10]
+
+        for idx, project in enumerate(project_qs):
+            for field in fields_to_check:
+                self.assertEqual(project[field], result[idx][field])
+
+    def test_project_endpoint_ordering(self):
+        """Asserts that project endpoint with ordering is working"""
+        baker.make('Project', 10)
+
+        order_fields = ['-ordering', 'name', '-slug', 'classification']
+        fields_to_check = ['name', 'slug', 'description', 'back_end', 'front_end',
+                           'classification', 'git_link', 'website_link', 'ordering']
+
+        for order_field in order_fields:
+            url = reverse('api:project-list') + f'?ordering={order_field}'
+            response = self.client.get(url)
+            result = response.data['results']
+
+            self.assertEqual(200, response.status_code)
+
+            # check if all retrieved values are the same
+            project_qs = Project.objects.order_by(order_field).values()
+            for idx, project in enumerate(project_qs):
+                for field in fields_to_check:
+                    self.assertEqual(project[field], result[idx][field])
+
+    def test_project_endpoint_filtering(self):
+        """Asserts that project endpoint with filtering is working"""
+        baker.make('Project', 15)
+        project_company_count = Project.objects.filter(classification='company').count()
+        url = reverse('api:project-list') + '?classification=company'
+        response = self.client.get(url)
+
+        result_project_company_count = 0
+        for result in response.data['results']:
+            if result['classification'] == 'company':
+                result_project_company_count += 1
+
+        self.assertEqual(200, response.status_code)
+        self.assertEqual(project_company_count, result_project_company_count)
 
     def test_project_detail_endpoint(self):
         """Todo: Add test for project detail endpoint"""

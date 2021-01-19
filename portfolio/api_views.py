@@ -24,7 +24,7 @@ class ProjectViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = ProjectSerializer
     queryset = Project.objects.prefetch_related('project_images')
     filter_backends = [OrderingFilter, DjangoFilterBackend]
-    ordering_fields = ['name', 'slug', 'classification']
+    ordering_fields = ['name', 'slug', 'classification', 'ordering']
     filterset_fields = ['name', 'slug', 'classification']
     lookup_field = 'slug'
 

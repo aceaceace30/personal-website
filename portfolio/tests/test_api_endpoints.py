@@ -104,7 +104,19 @@ class APIEndpointsTestCase(APILiveServerTestCase):
         self.assertEqual(project_company_count, result_project_company_count)
 
     def test_project_detail_endpoint(self):
-        """Todo: Add test for project detail endpoint"""
+        """Asserts that project detail endpoint is returning correct response"""
+        project = baker.make('Project')
+        url = reverse('api:project-detail', kwargs={'slug': project.slug})
+        response = self.client.get(url)
+
+        fields_to_check = ['name', 'slug', 'description', 'back_end', 'front_end',
+                           'classification', 'git_link', 'website_link', 'ordering']
+
+        self.assertEqual(200, response.status_code)
+
+        for field in fields_to_check:
+            self.assertEqual(getattr(project, field), response.data[field])
+
 
     def test_skill_endpoint(self):
         """Todo: Add test for skill endpoint"""

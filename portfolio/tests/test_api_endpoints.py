@@ -3,7 +3,7 @@ from rest_framework.test import APILiveServerTestCase
 
 from model_bakery import baker
 
-from portfolio.models import Project
+from portfolio.models import Project, Skill, JobExperience, Testimonial
 
 
 class APIEndpointsTestCase(APILiveServerTestCase):
@@ -78,7 +78,7 @@ class APIEndpointsTestCase(APILiveServerTestCase):
         for order_field in order_fields:
             url = reverse('api:project-list') + f'?ordering={order_field}'
             response = self.client.get(url)
-            result = response.data['results']
+            results = response.data['results']
 
             self.assertEqual(200, response.status_code)
 
@@ -86,7 +86,7 @@ class APIEndpointsTestCase(APILiveServerTestCase):
             project_qs = Project.objects.order_by(order_field).values()
             for idx, project in enumerate(project_qs):
                 for field in fields_to_check:
-                    self.assertEqual(project[field], result[idx][field])
+                    self.assertEqual(project[field], results[idx][field])
 
     def test_project_endpoint_filtering(self):
         """Asserts that project endpoint with filtering is working"""
@@ -117,12 +117,134 @@ class APIEndpointsTestCase(APILiveServerTestCase):
         for field in fields_to_check:
             self.assertEqual(getattr(project, field), response.data[field])
 
-
     def test_skill_endpoint(self):
-        """Todo: Add test for skill endpoint"""
+        """Asserts that skill endpoint is returning correct response"""
+        baker.make('Skill', _quantity=12)
+        url = reverse('api:skill-list')
+        response = self.client.get(url)
+        results = response.data['results']
+        self.assertEqual(200, response.status_code)
+        self.assertEqual(10, len(results))
+        fields_to_check = ['name', 'value', 'ordering']
+
+        skill_qs = Skill.objects.all().values()[:10]
+
+        for idx, skill in enumerate(skill_qs):
+            for field in fields_to_check:
+                self.assertEqual(skill[field], results[idx][field])
+
+    def test_skill_endpoint_ordering(self):
+        """Asserts that skill endpoint is returning correct response with ordering"""
+        baker.make('Skill', _quantity=12)
+        order_fields = ['name', '-value', 'ordering', '-created_at']
+        fields_to_check = ['name', 'value', 'ordering']
+
+        for order_field in order_fields:
+            url = reverse('api:skill-list') + f'?ordering={order_field}'
+            response = self.client.get(url)
+            results = response.data['results']
+
+            self.assertEqual(200, response.status_code)
+
+            # check if all retrieved values are the same
+            skill_qs = Skill.objects.order_by(order_field).values()[:10]
+            for idx, skill in enumerate(skill_qs):
+                for field in fields_to_check:
+                    self.assertEqual(skill[field], results[idx][field])
+
+    def test_skill_endpoint_filtering(self):
+        """Asserts that skill endpoint is returning correct response with filtering"""
+        baker.make('Skill', _quantity=12)
+        for skill in Skill.objects.all()[:4]:
+            skill.active = False
+            skill.save()
+
+        url = reverse('api:skill-list') + '?active=true'
+        response = self.client.get(url)
+
+        self.assertEqual(200, response.status_code)
+        self.assertEqual(8, response.data['count'])
 
     def test_job_experience_endpoint(self):
-        """Todo: Add test for about endpoint"""
+        """Asserts that job-experience endpoint is returning correct response"""
+        baker.make('JobExperience', _quantity=12)
+        url = reverse('api:job-experience-list')
+        response = self.client.get(url)
+        results = response.data['results']
+        self.assertEqual(200, response.status_code)
+        self.assertEqual(10, len(results))
+        fields_to_check = ['job_title', 'company', 'duration']
+
+        job_experience_qs = JobExperience.objects.all().values()[:10]
+
+        for idx, job_exp in enumerate(job_experience_qs):
+            for field in fields_to_check:
+                self.assertEqual(job_exp[field], results[idx][field])
+
+    def test_job_experience_endpoint_ordering(self):
+        """Asserts that job_experience endpoint is returning correct response with ordering"""
+        baker.make('JobExperience', _quantity=12)
+        order_fields = ['job_title', '-company', 'duration', '-created_at']
+        fields_to_check = ['job_title', 'company', 'duration']
+
+        for order_field in order_fields:
+            url = reverse('api:job-experience-list') + f'?ordering={order_field}'
+            response = self.client.get(url)
+            results = response.data['results']
+
+            self.assertEqual(200, response.status_code)
+
+            # check if all retrieved values are the same
+            job_experience = JobExperience.objects.order_by(order_field).values()[:10]
+            for idx, job_exp in enumerate(job_experience):
+                for field in fields_to_check:
+                    self.assertEqual(job_exp[field], results[idx][field])
+
+    def test_job_experience_endpoint_filtering(self):
+        """Asserts that job_experience endpoint is returning correct response with filtering"""
+        baker.make('JobExperience', _quantity=15)
+        for job_exp in JobExperience.objects.all()[:8]:
+            job_exp.active = False
+            job_exp.save()
+
+        url = reverse('api:job-experience-list') + '?active=true'
+        response = self.client.get(url)
+
+        self.assertEqual(200, response.status_code)
+        self.assertEqual(7, response.data['count'])
 
     def test_testimonial_endpoint(self):
-        """Todo: Add test for testimonial endpoint"""
+        """Asserts that testimonial endpoint is returning correct response"""
+        baker.make('Testimonial', _quantity=15)
+
+        url = reverse('api:testimonial-list')
+        response = self.client.get(url)
+        results = response.data['results']
+
+        self.assertEqual(200, response.status_code)
+
+        fields_to_check = ['project_year', 'platform']
+        # check if all retrieved values are the same
+        testimonial_qs = Testimonial.objects.all().values()[:10]
+        for idx, testi in enumerate(testimonial_qs):
+            for field in fields_to_check:
+                self.assertEqual(testi[field], results[idx][field])
+
+    def test_testimonial_endpoint_ordering(self):
+        """Asserts that testimonial endpoint is returning correct response with ordering"""
+        baker.make('Testimonial', _quantity=12)
+        order_fields = ['project_year', '-platform', 'created_at']
+        fields_to_check = ['project_year', 'platform']
+
+        for order_field in order_fields:
+            url = reverse('api:testimonial-list') + f'?ordering={order_field}'
+            response = self.client.get(url)
+            results = response.data['results']
+
+            self.assertEqual(200, response.status_code)
+
+            # check if all retrieved values are the same
+            testimonial_qs = Testimonial.objects.order_by(order_field).values()[:10]
+            for idx, testi in enumerate(testimonial_qs):
+                for field in fields_to_check:
+                    self.assertEqual(testi[field], results[idx][field])

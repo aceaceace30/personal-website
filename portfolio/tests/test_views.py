@@ -91,7 +91,7 @@ class TestViews(TestCase):
         Asserts that TestimonialUpdateView is working properly
         - positive_remarks, improvement_remarks has been updated
         - is_answered field is set to True
-        - Permission Denied is raised after the update has been saved
+        - Permission Denied is raised after if the form is already answered
         :return: 
         """
         hash_key = '10722bf8-8a81-4e2c-8bf6-9836006052ec'

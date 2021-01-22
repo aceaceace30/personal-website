@@ -25,6 +25,7 @@ ALLOWED_HOSTS = ['acedev30.pythonanywhere.com', '127.0.0.1']
 INSTALLED_APPS = [
     # project_apps
     'portfolio',
+    'blogs',
 
     # packages
     'ckeditor',

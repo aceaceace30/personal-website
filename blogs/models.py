@@ -1,3 +1,4 @@
+from ckeditor.fields import RichTextField
 from django.contrib.auth.models import User
 from django.db import models
 
@@ -15,7 +16,7 @@ class Tag(models.Model):
 class Blog(models.Model):
     title = models.CharField(max_length=100, unique=True)
     slug = models.SlugField(max_length=100, unique=True)
-    content = models.TextField()
+    content = RichTextField()
     tags = models.ManyToManyField(Tag, through='BlogTag')
 
     active = models.BooleanField(default=True)

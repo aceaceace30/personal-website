@@ -198,11 +198,11 @@
                     <div class="col-lg-4">
                         <div class="card shadow h-100">
                             <div class="card-body">
-                                <p class="card-text font-italic h3">"{{ testi.positive_remarks }}"</p>
+                                <p class="card-text font-italic h5">"{{ testi.positive_remarks }}"</p>
                                 <hr/>
-                                <small class="font-weight-bold">
-                                    {{ testi.name }}<br/>{{ testi.platform }}<br/>{{ testi.created_at|date:"M d, Y" }}
-                                </small>
+                                <small class="font-weight-bold">{{ testi.name }}<br/>{{ testi.platform }}</small>
+                                <br/>
+                                <small>{{ testi.created_at|date:"M d, Y" }}</small>
                             </div>
                         </div>
                     </div>

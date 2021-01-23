@@ -1,3 +1,5 @@
+import os
+
 from ckeditor.fields import RichTextField
 from django.contrib.auth.models import User
 from django.db import models
@@ -16,6 +18,7 @@ class Tag(models.Model):
 class Blog(models.Model):
     title = models.CharField(max_length=100, unique=True)
     slug = models.SlugField(max_length=100, unique=True)
+    cover = models.ImageField(upload_to='blog_covers', null=True, blank=True)
     content = RichTextField()
     tags = models.ManyToManyField(Tag, through='BlogTag')
 
@@ -32,10 +35,27 @@ class Blog(models.Model):
     def __str__(self):
         return self.title
 
+    @property
+    def cover_name(self):
+        return os.path.basename(self.cover.url)
+
 
 class BlogTag(models.Model):
     blog = models.ForeignKey(Blog, on_delete=models.PROTECT)
     tag = models.ForeignKey(Tag, on_delete=models.PROTECT)
 
+    class Meta:
+        default_related_name = 'blog_tags'
+        unique_together = ('blog', 'tag')
+
     def __str__(self):
-        return f'{self.blog.title} - {self.tag.name}'
+        return self.tag.name
+
+    @property
+    def color(self):
+        return self.tag.color
+
+    @property
+    def name(self):
+        return self.tag.name
+

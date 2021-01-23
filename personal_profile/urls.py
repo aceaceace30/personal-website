@@ -22,7 +22,8 @@ urlpatterns = [
     path('client-comment-form/<slug:hash_key>/', TestimonialUpdateView.as_view(), name='client_comment_form'),
     path('thank-you/', ThankYouView.as_view(), name='thank_you'),
     path('', include('portfolio.urls', namespace='portfolio')),
-    path('blogs/', include('blogs.urls', namespace='blogs'))
+    path('blogs/', include('blogs.urls', namespace='blogs')),
+    path('ckeditor/', include('ckeditor_uploader.urls')),
 ]
 
 urlpatterns += [

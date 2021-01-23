@@ -29,6 +29,7 @@ INSTALLED_APPS = [
 
     # packages
     'ckeditor',
+    'ckeditor_uploader',
     'crispy_forms',
     'rest_framework',
     'django_filters',
@@ -131,6 +132,8 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+CKEDITOR_UPLOAD_PATH = 'ckeditor/uploads/'
 
 # Email settings
 

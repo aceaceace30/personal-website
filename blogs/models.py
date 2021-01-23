@@ -1,6 +1,6 @@
 import os
 
-from ckeditor.fields import RichTextField
+from ckeditor_uploader.fields import RichTextUploadingField
 from django.contrib.auth.models import User
 from django.db import models
 
@@ -19,7 +19,7 @@ class Blog(models.Model):
     title = models.CharField(max_length=100, unique=True)
     slug = models.SlugField(max_length=100, unique=True)
     cover = models.ImageField(upload_to='blog_covers', null=True, blank=True)
-    content = RichTextField()
+    content = RichTextUploadingField()
     tags = models.ManyToManyField(Tag, through='BlogTag')
 
     active = models.BooleanField(default=True)

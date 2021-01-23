@@ -14,3 +14,4 @@ class BlogDetailView(DetailView):
     template_name = 'blogs/blog_detail.html'
     model = Blog
     context_object_name = 'blog'
+    queryset = Blog.objects.filter(active=True)

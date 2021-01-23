@@ -1,9 +1,9 @@
-from django.conf import settings
 from django.contrib import admin
-from django.core.mail import send_mail
-from django.template.loader import render_to_string
 
-from .models import Project, About, Skill, Task, JobExperience, Message, ProjectImage, Testimonial
+from .models import (
+    Project, About, Skill, Task, JobExperience,
+    Message, ProjectImage, Testimonial
+)
 
 
 class TaskInline(admin.TabularInline):

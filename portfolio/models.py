@@ -159,7 +159,7 @@ class JobExperience(models.Model):
     job_title = models.CharField(max_length=150)
     company = models.CharField(max_length=150)
     duration = models.CharField(max_length=150)
-    task = models.ManyToManyField(Task, through='JobExperienceTask', related_name='job_experiences')
+    tasks = models.ManyToManyField(Task, through='JobExperienceTask', related_name='job_experiences')
     ordering = models.PositiveIntegerField(unique=True)
     active = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)

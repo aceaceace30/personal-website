@@ -7,7 +7,7 @@ from .models import (
 
 
 class TaskInline(admin.TabularInline):
-    model = JobExperience.task.through
+    model = JobExperience.tasks.through
 
 
 class ProjectImageInline(admin.StackedInline):

@@ -196,11 +196,12 @@
             <div class="row" data-aos="fade-in">
                 {% for testi in testimonials %}
                     <div class="col-lg-4">
-                        <div class="card h-100">
+                        <div class="card shadow h-100">
                             <div class="card-body">
-                                <h5 class="font-italic">"{{ testi.positive_remarks }}"</h5>
-                                <small>
-                                    {{ testi.name }} from {{ testi.platform }} | {{ testi.created_at|date:"M d, Y" }}
+                                <p class="card-text font-italic h3">"{{ testi.positive_remarks }}"</p>
+                                <hr/>
+                                <small class="font-weight-bold">
+                                    {{ testi.name }}<br/>{{ testi.platform }}<br/>{{ testi.created_at|date:"M d, Y" }}
                                 </small>
                             </div>
                         </div>

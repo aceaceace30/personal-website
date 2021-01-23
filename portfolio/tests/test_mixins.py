@@ -35,7 +35,6 @@ class TestMixin(TestCase):
             'age': About.get_age('Nov 30, 1993'),
         }
 
-        self.assertEqual(settings.RESUME_PATH, context['resume_path'])
         self.assertEqual(info, context['info'])
         self.assertEqual(JobExperience.objects.filter(job_title='PROGRAMMER')[0].job_title,
                          context['job_experiences'][0].job_title)

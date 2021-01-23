@@ -172,8 +172,8 @@ class JobExperience(models.Model):
 
 
 class JobExperienceTask(models.Model):
-    job_experience = models.ForeignKey(JobExperience, on_delete=models.PROTECT)
-    task = models.ForeignKey(Task, on_delete=models.PROTECT)
+    job_experience = models.ForeignKey(JobExperience, on_delete=models.CASCADE)
+    task = models.ForeignKey(Task, on_delete=models.CASCADE)
 
     def __str__(self):
         return f'{self.job_experience} | {self.task}'

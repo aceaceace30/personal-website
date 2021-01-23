@@ -41,8 +41,8 @@ class Blog(models.Model):
 
 
 class BlogTag(models.Model):
-    blog = models.ForeignKey(Blog, on_delete=models.PROTECT)
-    tag = models.ForeignKey(Tag, on_delete=models.PROTECT)
+    blog = models.ForeignKey(Blog, on_delete=models.CASCADE)
+    tag = models.ForeignKey(Tag, on_delete=models.CASCADE)
 
     class Meta:
         default_related_name = 'blog_tags'
@@ -58,4 +58,3 @@ class BlogTag(models.Model):
     @property
     def name(self):
         return self.tag.name
-

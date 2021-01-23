@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'rest_framework',
     'django_filters',
+    'colorfield',
 
     # django built-ins
     'django.contrib.admin',

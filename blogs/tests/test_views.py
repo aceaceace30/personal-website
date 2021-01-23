@@ -27,6 +27,16 @@ class TestViews(TestCase):
             self.assertEqual(blog['slug'], getattr(blog_list_context[idx], 'slug'))
             self.assertEqual(blog['content'], getattr(blog_list_context[idx], 'content'))
 
+    def test_blog_list_with_empty_data(self):
+        """
+        Asserts that BlogListView is returning status 200 on GET request
+        on empty queryset
+        """
+        Blog.objects.all().delete()
+        url = reverse('blogs:blog-list')
+        response = self.client.get(url)
+        self.assertEqual(200, response.status_code)
+
     def test_blog_detail_returns_status_200_and_context(self):
         """
         Asserts that BlogDetailView is returning status 200 on GET request

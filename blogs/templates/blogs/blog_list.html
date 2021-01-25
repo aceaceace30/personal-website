@@ -12,8 +12,8 @@
 
             <div class="row">
                 {% for blog in blogs %}
-                    <div class="col-lg-6">
-                        <div class="card shadow h-100 pt-3">
+                    <div class="col-lg-6 pt-3">
+                        <div class="card shadow h-100">
                             {% if blog.cover %}
                                 <img src="{{ blog.cover.url }}"
                                      class="card-img-top"

@@ -52,7 +52,7 @@ class TestViews(TestCase):
         self.assertEqual(blog.slug, getattr(blog_context, 'slug'))
         self.assertEqual(blog.content, getattr(blog_context, 'content'))
 
-    def test_blog_detail_returns_status_400(self):
+    def test_blog_detail_returns_status_404(self):
         """Asserts that BlogDetailView is returning status 404 for GET request with inactive/not existing slug"""
 
         # for inactive blog

@@ -123,13 +123,13 @@
                 </div>
                 <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
                     <h3 class="resume-title">Professional Experience</h3>
-                    {% for je in job_experiences %}
+                    {% for job_experience in job_experiences %}
                         <div class="resume-item">
-                            <h4>{{ je.job_title }}</h4>
-                            <h5>{{ je.duration }}</h5>
-                            <p><em>{{ je.company }}</em></p>
+                            <h4>{{ job_experience.job_title }}</h4>
+                            <h5>{{ job_experience.duration }}</h5>
+                            <p><em>{{ job_experience.company }}</em></p>
                             <ul>
-                                {% for task in je.task.all %}
+                                {% for task in job_experience.tasks.all %}
                                     <li>{{ task.description }}</li>
                                 {% endfor %}
                             </ul>

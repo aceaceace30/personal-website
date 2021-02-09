@@ -48,7 +48,7 @@
 
         <div class="profile">
             <img src="{% static 'portfolio/assets/img/profile-img.jpg' %}" alt="" class="img-fluid rounded-circle">
-            <h1 class="text-light"><a href="{% url 'portfolio:homepage' %}">{{ info.full_name }}</a></h1>
+            <h1 class="text-light"><a href="{% url 'homepage' %}">{{ info.full_name }}</a></h1>
             <div class="social-links mt-3 text-center">
                 <a href="{{ info.linkedin_url }}" target="_blank" class="linkedin"><i
                         class="bx bxl-linkedin"></i></a>
@@ -59,16 +59,16 @@
 
         <nav class="nav-menu">
             <ul>
-                <li class="active"><a href="{% url 'portfolio:homepage' %}#hero"><i class="bx bx-home"></i> <span>Home</span></a>
+                <li class="active"><a href="{% url 'homepage' %}#hero"><i class="bx bx-home"></i> <span>Home</span></a>
                 </li>
-                <li><a href="{% url 'portfolio:homepage' %}#about"><i class="bx bx-user"></i> <span>About</span></a></li>
-                <li><a href="{% url 'portfolio:homepage' %}#resume"><i class="bx bx-note"></i> <span>Resume</span></a></li>
-                <li><a href="{% url 'portfolio:homepage' %}#portfolio"><i class="bx bx-book-content"></i> Portfolio</a></li>
-                <li><a href="{% url 'portfolio:homepage' %}#testimonials"><i class="bx bx-comment"></i> Testimonials</a></li>
+                <li><a href="{% url 'homepage' %}#about"><i class="bx bx-user"></i> <span>About</span></a></li>
+                <li><a href="{% url 'homepage' %}#resume"><i class="bx bx-note"></i> <span>Resume</span></a></li>
+                <li><a href="{% url 'homepage' %}#portfolio"><i class="bx bx-book-content"></i> Portfolio</a></li>
+                <li><a href="{% url 'homepage' %}#testimonials"><i class="bx bx-comment"></i> Testimonials</a></li>
                 <li><a href="{% url 'blogs:blog-list' %}"><i class="bx bx-book-alt"></i> Blogs</a></li>
-                <li><a href="{% url 'portfolio:homepage' %}#contact"><i class="bx bxs-contact"></i> Contact</a></li>
+                <li><a href="{% url 'homepage' %}#contact"><i class="bx bxs-contact"></i> Contact</a></li>
                 <li><a href="{{ project_repo_link }}" target="_blank"><i class="bx bx-code"></i> Project Code</a></li>
-                <li><a href="{% url 'api:api-root' %}" target="_blank"><i class="bx bx-search"></i> Browsable API</a></li>
+                <li><a href="{% url 'api-portfolio:api-root' %}" target="_blank"><i class="bx bx-search"></i> Browsable API</a></li>
             </ul>
         </nav><!-- .nav-menu -->
         <button type="button" class="mobile-nav-toggle d-xl-none"><i class="icofont-navigation-menu"></i></button>

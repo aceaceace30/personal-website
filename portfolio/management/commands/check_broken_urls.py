@@ -36,7 +36,7 @@ class Command(BaseCommand):
 
     @staticmethod
     def get_website_urls():
-        project_urls = [settings.DOMAIN_NAME + reverse('portfolio:homepage')]
+        project_urls = [settings.DOMAIN_NAME + reverse('homepage')]
 
         # get all project details
         for slug in Project.objects.values_list('slug', flat=True):

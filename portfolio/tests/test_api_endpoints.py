@@ -12,7 +12,7 @@ class APIEndpointsTestCase(APILiveServerTestCase):
     def test_about_endpoint(self):
         """Asserts that plain about endpoint is working"""
         abouts = baker.make('About', 15)
-        url = reverse('api:about-list')
+        url = reverse('api-portfolio:about-list')
         response = self.client.get(url)
 
         self.assertEqual(200, response.status_code)
@@ -25,7 +25,7 @@ class APIEndpointsTestCase(APILiveServerTestCase):
     def test_about_endpoint_ordering(self):
         """Asserts that about endpoint ordering is working"""
         abouts = baker.make('About', 10)
-        url = reverse('api:about-list') + '?ordering=-id'
+        url = reverse('api-portfolio:about-list') + '?ordering=-id'
         response = self.client.get(url)
 
         self.assertEqual(200, response.status_code)
@@ -38,7 +38,7 @@ class APIEndpointsTestCase(APILiveServerTestCase):
         """Asserts that about endpoint field filtering is working"""
         abouts = baker.make('About', 5)
         about = abouts[0]
-        url = reverse('api:about-list') + f'?name={about.name}&value={about.value}'
+        url = reverse('api-portfolio:about-list') + f'?name={about.name}&value={about.value}'
         response = self.client.get(url)
 
         self.assertEqual(200, response.status_code)
@@ -50,7 +50,7 @@ class APIEndpointsTestCase(APILiveServerTestCase):
         """Asserts that plain project endpoint is working"""
         baker.make('Project', 20)
 
-        url = reverse('api:project-list')
+        url = reverse('api-portfolio:project-list')
         response = self.client.get(url)
         result = response.data['results']
 
@@ -76,7 +76,7 @@ class APIEndpointsTestCase(APILiveServerTestCase):
                            'classification', 'git_link', 'website_link', 'ordering']
 
         for order_field in order_fields:
-            url = reverse('api:project-list') + f'?ordering={order_field}'
+            url = reverse('api-portfolio:project-list') + f'?ordering={order_field}'
             response = self.client.get(url)
             results = response.data['results']
 
@@ -92,7 +92,7 @@ class APIEndpointsTestCase(APILiveServerTestCase):
         """Asserts that project endpoint with filtering is working"""
         baker.make('Project', 15)
         project_company_count = Project.objects.filter(classification='company').count()
-        url = reverse('api:project-list') + '?classification=company'
+        url = reverse('api-portfolio:project-list') + '?classification=company'
         response = self.client.get(url)
 
         result_project_company_count = 0
@@ -106,7 +106,7 @@ class APIEndpointsTestCase(APILiveServerTestCase):
     def test_project_detail_endpoint(self):
         """Asserts that project detail endpoint is returning correct response"""
         project = baker.make('Project')
-        url = reverse('api:project-detail', kwargs={'slug': project.slug})
+        url = reverse('api-portfolio:project-detail', kwargs={'slug': project.slug})
         response = self.client.get(url)
 
         fields_to_check = ['name', 'slug', 'description', 'back_end', 'front_end',
@@ -120,7 +120,7 @@ class APIEndpointsTestCase(APILiveServerTestCase):
     def test_skill_endpoint(self):
         """Asserts that skill endpoint is returning correct response"""
         baker.make('Skill', _quantity=12)
-        url = reverse('api:skill-list')
+        url = reverse('api-portfolio:skill-list')
         response = self.client.get(url)
         results = response.data['results']
         self.assertEqual(200, response.status_code)
@@ -140,7 +140,7 @@ class APIEndpointsTestCase(APILiveServerTestCase):
         fields_to_check = ['name', 'value', 'ordering']
 
         for order_field in order_fields:
-            url = reverse('api:skill-list') + f'?ordering={order_field}'
+            url = reverse('api-portfolio:skill-list') + f'?ordering={order_field}'
             response = self.client.get(url)
             results = response.data['results']
 
@@ -159,7 +159,7 @@ class APIEndpointsTestCase(APILiveServerTestCase):
             skill.active = False
             skill.save()
 
-        url = reverse('api:skill-list') + '?active=true'
+        url = reverse('api-portfolio:skill-list') + '?active=true'
         response = self.client.get(url)
 
         self.assertEqual(200, response.status_code)
@@ -168,7 +168,7 @@ class APIEndpointsTestCase(APILiveServerTestCase):
     def test_job_experience_endpoint(self):
         """Asserts that job-experience endpoint is returning correct response"""
         baker.make('JobExperience', _quantity=12)
-        url = reverse('api:job-experience-list')
+        url = reverse('api-portfolio:job-experience-list')
         response = self.client.get(url)
         results = response.data['results']
         self.assertEqual(200, response.status_code)
@@ -188,7 +188,7 @@ class APIEndpointsTestCase(APILiveServerTestCase):
         fields_to_check = ['job_title', 'company', 'duration']
 
         for order_field in order_fields:
-            url = reverse('api:job-experience-list') + f'?ordering={order_field}'
+            url = reverse('api-portfolio:job-experience-list') + f'?ordering={order_field}'
             response = self.client.get(url)
             results = response.data['results']
 
@@ -207,7 +207,7 @@ class APIEndpointsTestCase(APILiveServerTestCase):
             job_exp.active = False
             job_exp.save()
 
-        url = reverse('api:job-experience-list') + '?active=true'
+        url = reverse('api-portfolio:job-experience-list') + '?active=true'
         response = self.client.get(url)
 
         self.assertEqual(200, response.status_code)
@@ -217,7 +217,7 @@ class APIEndpointsTestCase(APILiveServerTestCase):
         """Asserts that testimonial endpoint is returning correct response"""
         baker.make('Testimonial', _quantity=15)
 
-        url = reverse('api:testimonial-list')
+        url = reverse('api-portfolio:testimonial-list')
         response = self.client.get(url)
         results = response.data['results']
 
@@ -237,7 +237,7 @@ class APIEndpointsTestCase(APILiveServerTestCase):
         fields_to_check = ['project_year', 'platform']
 
         for order_field in order_fields:
-            url = reverse('api:testimonial-list') + f'?ordering={order_field}'
+            url = reverse('api-portfolio:testimonial-list') + f'?ordering={order_field}'
             response = self.client.get(url)
             results = response.data['results']
 

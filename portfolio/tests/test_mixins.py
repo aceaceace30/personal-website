@@ -20,7 +20,7 @@ class TestMixin(TestCase):
         Asserts the information_mixin adds data to context
         :return:
         """
-        url = reverse('portfolio:homepage')
+        url = reverse('homepage')
         request = RequestFactory().get(url)
 
         view = self.TestView()

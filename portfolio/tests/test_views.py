@@ -16,7 +16,7 @@ class TestViews(TestCase):
         Asserts that home page is working
         :return:
         """
-        url = reverse('portfolio:homepage')
+        url = reverse('homepage')
         response = self.client.get(url)
 
         self.assertEqual(200, response.status_code)

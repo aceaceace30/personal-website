@@ -1,7 +1,3 @@
-import os
-
-from django.conf import settings
-from django.urls import reverse
 from rest_framework import serializers
 from portfolio.models import (
     About, Project, ProjectImage, Skill,
@@ -34,7 +30,7 @@ class ProjectSerializer(serializers.ModelSerializer):
                   'classification', 'git_link', 'website_link', 'ordering',
                   'next_project_url', 'previous_project_url', 'project_images']
         extra_kwargs = {
-            'url': {'view_name': 'api-portfolio:project-detail', 'lookup_field': 'slug'}
+            'url': {'view_name': 'api-project-detail', 'lookup_field': 'slug'}
         }
 
 

@@ -17,7 +17,11 @@ SECRET_KEY = env.str('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env.bool('DEBUG')
 
-ALLOWED_HOSTS = ['acedev30.pythonanywhere.com', '127.0.0.1']
+ALLOWED_HOSTS = ['127.0.0.1',
+                 'acedev30.pythonanywhere.com',
+                 'ec2-3-1-187-38.ap-southeast-1.compute.amazonaws.com',
+                 'ace-software-solution.tech',
+                 'personal.ace-software-solution.tech']
 
 
 # Application definition

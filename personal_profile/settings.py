@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'django_filters',
     'colorfield',
+    'django_celery_results',
 
     # django built-ins
     'django.contrib.admin',
@@ -154,3 +155,7 @@ REST_FRAMEWORK = {
     'PAGE_SIZE': 10,
     'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
 }
+
+# Celery configs
+CELERY_RESULT_BACKEND = 'django-db'
+CELERY_BROKER_URL = 'redis://localhost:6379'

@@ -9,6 +9,7 @@ from django.views.generic import ListView, DetailView, UpdateView, TemplateView
 from .decorators import check_if_testimonial_is_answered
 from .mixins import InformationMixin
 from .models import Project, Message, Testimonial
+from .tasks import send_mail_task
 
 
 class HomeListView(InformationMixin, ListView):
@@ -59,12 +60,6 @@ def send_message(request):
             setattr(message, key, value)
         message.save()
 
-        send_mail(
-            f'{message.subject} - {message.email}',
-            message.message,
-            settings.EMAIL_HOST_USER,
-            [settings.EMAIL_ADMIN],
-            fail_silently=False
-        )
+        send_mail_task.delay(message.subject, message.email, message.message)
 
         return HttpResponse('OK')

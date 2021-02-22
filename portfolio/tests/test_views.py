@@ -69,12 +69,12 @@ class TestViews(TestCase):
             'message': 'test_message',
         }
 
-        with patch('portfolio.views.send_mail') as mock_send_mail:
+        with patch('portfolio.views.send_mail_task.delay') as mock_send_mail_task:
             response = self.client.post(url, data=data)
             self.assertEqual(200, response.status_code)
             self.assertEqual(b'OK', response.content)
             self.assertTrue(Message.objects.filter(name='test_name').exists())
-            self.assertTrue(mock_send_mail.called)
+            self.assertTrue(mock_send_mail_task.called)
 
     def test_testimonial_update_view_status_200(self):
         """

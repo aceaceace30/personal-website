@@ -69,4 +69,3 @@ class LinkCheckerTestCase(LiveServerTestCase):
 
         self.assertEqual(3, mock_req_get.call_count)
         self.assertEqual(3, mock_get_broken_links.call_count)
-

@@ -4,6 +4,7 @@ Django settings for personal_profile project.
 
 import os
 import environ
+from celery.schedules import crontab
 
 env = environ.Env()
 environ.Env.read_env()
@@ -163,3 +164,10 @@ REST_FRAMEWORK = {
 # Celery configs
 CELERY_RESULT_BACKEND = 'django-db'
 CELERY_BROKER_URL = 'redis://localhost:6379'
+
+CELERY_BEAT_SCHEDULE = {
+    'check-site-broken-links-everyday': {
+        'task': 'check_site_broken_links',
+        'schedule': crontab(hour=9),
+    }
+}

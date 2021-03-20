@@ -19,7 +19,7 @@ class LinkChecker:
     )
 
     def run(self):
-        for url in self.get_website_urls():
+        for url in self.get_site_urls():
             page = requests.get(url)
             self.get_broken_links(page.content)
 
@@ -36,7 +36,7 @@ class LinkChecker:
             )
 
     @staticmethod
-    def get_website_urls():
+    def get_site_urls():
         project_urls = [settings.DOMAIN_NAME + reverse('homepage')]
 
         # get all project details
@@ -62,5 +62,4 @@ class LinkChecker:
         for link, exc_stat_code in self.exceptions:
             if link in href_value and exc_stat_code == status_code:
                 return False
-
-        return bool(status_code != 200)
+        return status_code != 200

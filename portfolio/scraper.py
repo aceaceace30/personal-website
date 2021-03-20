@@ -19,7 +19,9 @@ class LinkChecker:
     )
 
     def run(self):
+        print('Running checks for broken links')
         for url in self.get_site_urls():
+            print(f'Checking for: {url}')
             page = requests.get(url)
             self.get_broken_links(page.content)
 

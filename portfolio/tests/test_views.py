@@ -69,7 +69,7 @@ class TestViews(TestCase):
             'message': 'test_message',
         }
 
-        with patch('portfolio.views.send_mail_task') as mock_send_mail_task:
+        with patch('portfolio.views.send_mail_task.delay') as mock_send_mail_task:
             response = self.client.post(url, data=data)
             self.assertEqual(200, response.status_code)
             self.assertEqual(b'OK', response.content)

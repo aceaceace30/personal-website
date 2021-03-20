@@ -1,7 +1,7 @@
 from django.conf import settings
 from django.core.mail import send_mail
 
-from personal_profile.celery import app
+from personal_website.celery import app
 from portfolio.scraper import LinkChecker
 
 

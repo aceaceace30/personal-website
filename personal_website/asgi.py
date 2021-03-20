@@ -1,5 +1,5 @@
 """
-ASGI config for personal_profile project.
+ASGI config for personal_website project.
 
 It exposes the ASGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.asgi import get_asgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'personal_profile.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'personal_website.settings')
 
 application = get_asgi_application()

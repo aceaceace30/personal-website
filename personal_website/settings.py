@@ -1,5 +1,5 @@
 """
-Django settings for personal_profile project.
+Django settings for personal_website project.
 """
 
 import os
@@ -60,7 +60,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'personal_profile.urls'
+ROOT_URLCONF = 'personal_website.urls'
 
 TEMPLATES = [
     {
@@ -78,7 +78,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'personal_profile.wsgi.application'
+WSGI_APPLICATION = 'personal_website.wsgi.application'
 
 
 # Database

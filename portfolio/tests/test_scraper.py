@@ -1,5 +1,6 @@
 from unittest.mock import patch
 
+from django.conf import settings
 from django.test import LiveServerTestCase
 
 from portfolio.scraper import LinkChecker
@@ -55,9 +56,10 @@ class LinkCheckerTestCase(LiveServerTestCase):
 
     def test_get_site_urls(self):
         """Test if get_site_urls is returning list of site links"""
-        expected_result = ['http://127.0.0.1:8000/',
-                           'http://127.0.0.1:8000/portfolio/project/qoute-generator/',
-                           'http://127.0.0.1:8000/portfolio/project/inventory-management-system/']
+        base_url = settings.DOMAIN_NAME
+        expected_result = [f'{base_url}/',
+                           f'{base_url}/portfolio/project/qoute-generator/',
+                           f'{base_url}/portfolio/project/inventory-management-system/']
         site_urls = self.link_checker.get_site_urls()
         self.assertEqual(expected_result, site_urls)
 

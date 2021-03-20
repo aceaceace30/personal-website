@@ -1,11 +1,11 @@
 from unittest.mock import patch
 
-from django.test import TestCase
+from django.test import LiveServerTestCase
 
 from portfolio.scraper import LinkChecker
 
 
-class LinkCheckerTestCase(TestCase):
+class LinkCheckerTestCase(LiveServerTestCase):
     """Unit tests for LinkChecker class methods"""
     fixtures = ['portfolio/fixtures/test_views.json']
 
@@ -16,54 +16,40 @@ class LinkCheckerTestCase(TestCase):
         """
         Test if validate method is returning false for ff cases:
             - url contains the word `www.linkedin.com` and status code is 999
-            - status code is not equal to 200
+            - status code is equal to 200
         """
         result = self.link_checker.validate('www.linkedin.com/myprofile/test/', 999)
         self.assertFalse(result)
 
-        result = self.link_checker.validate('www.test-site.com/', 404)
+        result = self.link_checker.validate('www.test-site.com/', 200)
         self.assertFalse(result)
 
     def test_validate_returns_true(self):
-        """Test if validate method is returning true for valid url and status code is equal to 200"""
-        result = self.link_checker.validate('www.valid-url.com/', 200)
+        """Test if validate method is returning true for broken url and status code is not equal 200"""
+        result = self.link_checker.validate('www.broken-url.com/', 404)
         self.assertTrue(result)
 
     def test_get_broken_links_valid_broken_url(self):
-        href_value = 'https://www.invalid-site.com/test/'
-        with patch('portfolio.scraper.requests.get') as mock_get:
-            test_content = b'<a href="https://www.invalid-site.com/test/">Invalid Site</a>'
-            self.link_checker.get_broken_links(test_content)
+        href_value = self.live_server_url + '/invalid-path/'
+        test_content = bytes(f'<a href="{href_value}">Invalid Site</a>', encoding='utf-8')
+        self.link_checker.get_broken_links(test_content)
 
-            mock_get.status_code.return_value = 404
-            mock_get.assert_called_once_with(href_value)
-
-        for item in self.link_checker.broken_links:
-            self.assertEqual((href_value, 404), item)
+        self.assertEqual((href_value, 404), self.link_checker.broken_links[0])
+        self.assertEqual(f'<ul><li>{href_value} - 404</li>', self.link_checker.html_message)
 
     def test_get_broken_links_in_exception(self):
         """Test if get_broken_links is not considering the exceptions as broken link"""
         href_value = 'https://www.linkedin.com/in/michael-jay-ababao-3518b0162/'
-        with patch('portfolio.scraper.requests.get') as mock_get:
-            test_content = b'<a href="https://www.linkedin.com/in/michael-jay-ababao-3518b0162/"' \
-                           b' target="_blank" class="linkedin">LinkedIn</a>'
-            self.link_checker.get_broken_links(test_content)
-
-            mock_get.status_code.return_value = 999
-            mock_get.assert_called_once_with(href_value)
+        test_content = bytes(f'<a href="{href_value}">LinkedIn</a>', encoding='utf-8')
+        self.link_checker.get_broken_links(test_content)
 
         self.assertListEqual([], self.link_checker.broken_links)
 
     def test_get_broken_links_not_adding_valid_links(self):
         """Test if get_broken_links is not adding non broken links"""
-        href_value = 'https://github.com/aceaceace30/portfolio'
-        with patch('portfolio.scraper.requests.get') as mock_get:
-            test_content = b'<a href="https://github.com/aceaceace30/portfolio"' \
-                           b' title="Project Code Repository" target="_blank">Github</a>'
-            self.link_checker.get_broken_links(test_content)
-
-            mock_get.status_code.return_value = 200
-            mock_get.assert_called_once_with(href_value)
+        href_value = self.live_server_url
+        test_content = bytes(f'<a href="{href_value}">Valid Url</a>', encoding='utf-8')
+        self.link_checker.get_broken_links(test_content)
 
         self.assertListEqual([], self.link_checker.broken_links)
 

@@ -60,6 +60,6 @@ def send_message(request):
             setattr(message, key, value)
         message.save()
 
-        send_mail_task.delay(message.subject, message.email, message.message)
+        send_mail_task(message.subject, message.email, message.message)
 
         return HttpResponse('OK')

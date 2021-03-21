@@ -165,9 +165,10 @@ REST_FRAMEWORK = {
 CELERY_RESULT_BACKEND = 'django-db'
 CELERY_BROKER_URL = 'redis://localhost:6379'
 
-CELERY_BEAT_SCHEDULE = {
-    'check-site-broken-links-everyday': {
-        'task': 'check_site_broken_links',
-        'schedule': crontab(hour=9),
-    }
-}
+# Commented because the server can't have another celery worker because the number of process is maxed out
+# CELERY_BEAT_SCHEDULE = {
+#     'check-site-broken-links-everyday': {
+#         'task': 'check_site_broken_links',
+#         'schedule': crontab(hour=9),
+#     }
+# }

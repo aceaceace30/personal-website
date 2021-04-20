@@ -137,6 +137,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 CKEDITOR_UPLOAD_PATH = 'ckeditor/uploads/'
 
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 # Email settings
 
 EMAIL_USE_TLS = True

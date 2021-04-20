@@ -1,4 +1,4 @@
-# This workflow will install Python dependencies and MySQL, Set-up env and run unit test
+# This workflow will install Python dependencies and PostgresSQL, set-up env and run unit test
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-python-with-github-actions
 
 name: Python package
@@ -16,15 +16,19 @@ jobs:
     strategy:
       matrix:
         python-version: [3.7, 3.8]
-
+    services:
+      postgres:
+        image: postgres
+        ports: ['5432:5432']
+        env:
+          POSTGRES_USER: ${{ secrets.DB_USER }}
+          POSTGRES_PASSWORD: ${{ secrets.DB_PASS }}
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
     steps:
-    - uses: mirromutth/mysql-action@v1.1
-      with:
-        character set server: 'utf8'
-        collation server: 'utf8_general_ci'
-        mysql version: '8.0'
-        mysql database: ${{ secrets.DB_NAME }}
-        mysql root password: ${{ secrets.DB_PASS }}
     - uses: actions/checkout@v2
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v2
@@ -40,6 +44,7 @@ jobs:
       env:
         SECRET_KEY: ${{ secrets.SECRET_KEY }}
         DEBUG: ${{ secrets.DEBUG }}
+        DB_ENGINE: ${{ secrets.DB_ENGINE }}
         DB_NAME: ${{ secrets.DB_NAME }}
         DB_USER: ${{ secrets.DB_USER }}
         DB_PASS: ${{ secrets.DB_PASS }}

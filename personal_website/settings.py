@@ -16,13 +16,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = env.str('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env.bool('DEBUG')
+DEBUG = env.bool('DEBUG', False)
 
-ALLOWED_HOSTS = ['127.0.0.1',
-                 'acedev30.pythonanywhere.com',
-                 'ec2-3-1-187-38.ap-southeast-1.compute.amazonaws.com',
-                 'ace-software-solution.tech',
-                 'personal.ace-software-solution.tech']
+ALLOWED_HOSTS = env.str('ALLOWED_HOSTS', '127.0.0.1').split(',')
 
 
 # Application definition
@@ -86,8 +82,7 @@ WSGI_APPLICATION = 'personal_website.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'OPTIONS': {'sql_mode': 'traditional'},
+        'ENGINE': env.str('DB_ENGINE'),
         'NAME': env.str('DB_NAME'),
         'USER': env.str('DB_USER'),
         'PASSWORD': env.str('DB_PASS'),

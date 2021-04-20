@@ -44,6 +44,7 @@ jobs:
       env:
         SECRET_KEY: ${{ secrets.SECRET_KEY }}
         DEBUG: ${{ secrets.DEBUG }}
+        DB_ENGINE: ${{ secrets.DB_ENGINE }}
         DB_NAME: ${{ secrets.DB_NAME }}
         DB_USER: ${{ secrets.DB_USER }}
         DB_PASS: ${{ secrets.DB_PASS }}

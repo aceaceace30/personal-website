@@ -1,1 +1,1 @@
-echo web: gunicorn personal_profile.wsgi --log-file
+echo web: gunicorn personal_website.wsgi --log-file

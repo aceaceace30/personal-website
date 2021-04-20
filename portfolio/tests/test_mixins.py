@@ -20,7 +20,7 @@ class TestMixin(TestCase):
         Asserts the information_mixin adds data to context
         :return:
         """
-        url = reverse('portfolio:homepage')
+        url = reverse('homepage')
         request = RequestFactory().get(url)
 
         view = self.TestView()
@@ -35,7 +35,6 @@ class TestMixin(TestCase):
             'age': About.get_age('Nov 30, 1993'),
         }
 
-        self.assertEqual(settings.RESUME_PATH, context['resume_path'])
         self.assertEqual(info, context['info'])
         self.assertEqual(JobExperience.objects.filter(job_title='PROGRAMMER')[0].job_title,
                          context['job_experiences'][0].job_title)

@@ -11,7 +11,7 @@ def check_if_testimonial_is_answered(function):
         if testimonial.is_answered is False:
             return function(request, *args, **kwargs)
 
-        return redirect('portfolio:homepage')
+        return redirect('homepage')
 
     return wrap
 

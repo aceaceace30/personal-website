@@ -94,8 +94,8 @@
             <div class="section-title">
                 <h2>Resume >
                     <span>
-                        <a href="{{ resume_path }}" target="_blank" title="View Resume">View</a> |
-                        <a href="{{ resume_path }}" download title="Download Resume">Download</a>
+                        <a href="{% static 'portfolio/resume/CV-Michael-Jay-Pery-Ababao.pdf' %}" target="_blank" title="View Resume">View</a> |
+                        <a href="{% static 'portfolio/resume/CV-Michael-Jay-Pery-Ababao.pdf' %}" download title="Download Resume">Download</a>
                     </span>
                 </h2>
 
@@ -123,13 +123,13 @@
                 </div>
                 <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
                     <h3 class="resume-title">Professional Experience</h3>
-                    {% for je in job_experiences %}
+                    {% for job_experience in job_experiences %}
                         <div class="resume-item">
-                            <h4>{{ je.job_title }}</h4>
-                            <h5>{{ je.duration }}</h5>
-                            <p><em>{{ je.company }}</em></p>
+                            <h4>{{ job_experience.job_title }}</h4>
+                            <h5>{{ job_experience.duration }}</h5>
+                            <p><em>{{ job_experience.company }}</em></p>
                             <ul>
-                                {% for task in je.task.all %}
+                                {% for task in job_experience.tasks.all %}
                                     <li>{{ task.description }}</li>
                                 {% endfor %}
                             </ul>
@@ -196,12 +196,13 @@
             <div class="row" data-aos="fade-in">
                 {% for testi in testimonials %}
                     <div class="col-lg-4">
-                        <div class="card h-100">
+                        <div class="card shadow h-100">
                             <div class="card-body">
-                                <h5 class="font-italic">"{{ testi.positive_remarks }}"</h5>
-                                <small>
-                                    {{ testi.name }} from {{ testi.platform }} | {{ testi.created_at|date:"M d, Y" }}
-                                </small>
+                                <p class="card-text font-italic h5">"{{ testi.positive_remarks }}"</p>
+                                <hr/>
+                                <small class="font-weight-bold">{{ testi.name }}<br/>{{ testi.platform }}</small>
+                                <br/>
+                                <small>{{ testi.created_at|date:"M d, Y" }}</small>
                             </div>
                         </div>
                     </div>
@@ -251,7 +252,7 @@
                                 <a href="{{ project_repo_link }}" title="Project Code Repository" target="_blank">
                                     <u>Project Code</u>
                                 </a> |
-                                <a href="{% url 'api:api-root' %}" title="Browsable API" target="_blank">
+                                <a href="{% url 'api-root' %}" title="Browsable API" target="_blank">
                                     <u>Browsable API</u>
                                 </a>
                             </h4>

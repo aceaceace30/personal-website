@@ -1,0 +1,3 @@
+{% for tag in blog.blog_tags.all %}
+    <span class="badge text-darker p-2" style="background: {{ tag.color }}">#{{ tag.name }}</span>
+{% endfor %}

@@ -24,7 +24,7 @@ class ProjectViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = ProjectSerializer
     queryset = Project.objects.prefetch_related('project_images')
     filter_backends = [OrderingFilter, DjangoFilterBackend]
-    ordering_fields = ['name', 'slug', 'classification']
+    ordering_fields = ['name', 'slug', 'classification', 'ordering']
     filterset_fields = ['name', 'slug', 'classification']
     lookup_field = 'slug'
 
@@ -41,7 +41,7 @@ class SkillViewSet(viewsets.ReadOnlyModelViewSet):
 class JobExperienceViewSet(viewsets.ReadOnlyModelViewSet):
     """API Endpoint that retrieves latest Job Experiences"""
     serializer_class = JobExperienceSerializer
-    queryset = JobExperience.objects.prefetch_related('jobexperiencetask_set')
+    queryset = JobExperience.objects.prefetch_related('tasks')
     filter_backends = [OrderingFilter, DjangoFilterBackend]
     ordering_fields = ['job_title', 'company', 'duration', 'created_at']
     filterset_fields = ['active']

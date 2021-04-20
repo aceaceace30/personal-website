@@ -16,7 +16,7 @@ class TestViews(TestCase):
         Asserts that home page is working
         :return:
         """
-        url = reverse('portfolio:homepage')
+        url = reverse('homepage')
         response = self.client.get(url)
 
         self.assertEqual(200, response.status_code)
@@ -69,12 +69,12 @@ class TestViews(TestCase):
             'message': 'test_message',
         }
 
-        with patch('portfolio.views.send_mail') as mock_send_mail:
+        with patch('portfolio.views.send_mail_task') as mock_send_mail_task:
             response = self.client.post(url, data=data)
             self.assertEqual(200, response.status_code)
             self.assertEqual(b'OK', response.content)
             self.assertTrue(Message.objects.filter(name='test_name').exists())
-            self.assertTrue(mock_send_mail.called)
+            self.assertTrue(mock_send_mail_task.called)
 
     def test_testimonial_update_view_status_200(self):
         """
@@ -91,7 +91,7 @@ class TestViews(TestCase):
         Asserts that TestimonialUpdateView is working properly
         - positive_remarks, improvement_remarks has been updated
         - is_answered field is set to True
-        - Permission Denied is raised after the update has been saved
+        - Permission Denied is raised after if the form is already answered
         :return: 
         """
         hash_key = '10722bf8-8a81-4e2c-8bf6-9836006052ec'

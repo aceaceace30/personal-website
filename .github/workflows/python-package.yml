@@ -5,9 +5,9 @@ name: Python package
 
 on:
   push:
-    branches: [ master, heroku-master ]
+    branches: [ '*' ]
   pull_request:
-    branches: [ master, heroku-master ]
+    branches: [ '*' ]
 
 jobs:
   build:

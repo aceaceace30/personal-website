@@ -1,0 +1,28 @@
+{% extends 'portfolio/base.html' %}
+{% load static %}
+
+{% block title %}{{ blog.title }} | Michael Ababao{% endblock %}
+
+{% block content %}
+    <section id="blogs">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10">
+                    <div class="card shadow">
+                        <div class="card-body">
+                            <h2 class="card-title font-weight-bold">{{ blog.title }}</h2>
+                            <p class="card-text">
+                                {% include 'blogs/includes/tags.html' %}
+                            </p>
+                            <small class="p-0">Posted: {{ blog.created_at|timesince }} ago</small>
+                            <hr/>
+                            <p class="card-text">
+                                {{ blog.content|safe }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

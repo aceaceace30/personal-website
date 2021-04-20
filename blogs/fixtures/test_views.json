@@ -1,0 +1,47 @@
+[
+  {
+    "model": "blogs.blog",
+    "pk": 1,
+    "fields": {
+      "title": "My First Blog",
+      "slug": "my-first-blog",
+      "cover": "",
+      "content": "<p>My First Blog Sample Content</p>",
+      "active": true,
+      "created_by": null,
+      "updated_by": null,
+      "created_at": "2021-01-23T02:20:26.167Z",
+      "updated_at": "2021-01-23T08:04:21.357Z"
+    }
+  },
+  {
+    "model": "blogs.blog",
+    "pk": 2,
+    "fields": {
+      "title": "My Second Blog",
+      "slug": "my-second-blog",
+      "cover": "blog_covers/20201213_131915_p7ov8Mn.jpg",
+      "content": "<p>My Second Blog Sample Content</p>",
+      "active": true,
+      "created_by": null,
+      "updated_by": null,
+      "created_at": "2021-01-23T08:13:13.254Z",
+      "updated_at": "2021-01-23T08:13:13.255Z"
+    }
+  },
+  {
+    "model": "blogs.blog",
+    "pk": 3,
+    "fields": {
+      "title": "My Inactive Blog",
+      "slug": "my-inactive-blog",
+      "cover": "blog_covers/20201213_131915_p7ov8Mn.jpg",
+      "content": "<p>This blog is inactive</p>",
+      "active": false,
+      "created_by": null,
+      "updated_by": null,
+      "created_at": "2021-01-23T08:13:13.254Z",
+      "updated_at": "2021-01-23T08:13:13.255Z"
+    }
+  }
+]

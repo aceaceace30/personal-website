@@ -65,7 +65,7 @@ class Project(models.Model):
             project = Project.objects.get(ordering=self.ordering+1)
             if not as_url_path:
                 return project
-            return settings.DOMAIN_NAME + reverse('api:project-detail', kwargs={'slug': project.slug})
+            return settings.DOMAIN_NAME + reverse('api-project-detail', kwargs={'slug': project.slug})
         except Project.DoesNotExist:
             return None
 
@@ -81,7 +81,7 @@ class Project(models.Model):
             project = Project.objects.get(ordering=self.ordering-1)
             if not as_url_path:
                 return project
-            return settings.DOMAIN_NAME + reverse('api:project-detail', kwargs={'slug': project.slug})
+            return settings.DOMAIN_NAME + reverse('api-project-detail', kwargs={'slug': project.slug})
         except Project.DoesNotExist:
             return None
 
@@ -159,7 +159,7 @@ class JobExperience(models.Model):
     job_title = models.CharField(max_length=150)
     company = models.CharField(max_length=150)
     duration = models.CharField(max_length=150)
-    task = models.ManyToManyField(Task, through='JobExperienceTask', related_name='job_experiences')
+    tasks = models.ManyToManyField(Task, through='JobExperienceTask', related_name='job_experiences')
     ordering = models.PositiveIntegerField(unique=True)
     active = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -172,8 +172,8 @@ class JobExperience(models.Model):
 
 
 class JobExperienceTask(models.Model):
-    job_experience = models.ForeignKey(JobExperience, on_delete=models.PROTECT)
-    task = models.ForeignKey(Task, on_delete=models.PROTECT)
+    job_experience = models.ForeignKey(JobExperience, on_delete=models.CASCADE)
+    task = models.ForeignKey(Task, on_delete=models.CASCADE)
 
     def __str__(self):
         return f'{self.job_experience} | {self.task}'

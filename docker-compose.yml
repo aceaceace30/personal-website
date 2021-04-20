@@ -1,0 +1,21 @@
+version: "3.8"
+
+services:
+  web:
+    build: .
+    container_name: personal_website
+    command: python manage.py runserver 0.0.0.0:8000
+    ports:
+      - 8000:8000
+    depends_on:
+      - pgdb
+  pgdb:
+    image: postgres
+    container_name: pgdb
+    environment:
+      - DB_ENGINE=django.db.backends.postgresql
+      - DB_NAME=personal_website
+      - DB_USER=ace
+      - DB_PASS=ace1130
+      - DB_HOST=localhost
+      - DB_PORT=5432

@@ -9,7 +9,6 @@ class InformationMixin:
     """
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['resume_path'] = settings.RESUME_PATH
         context['project_repo_link'] = settings.PROJECT_REPO_LINK
         context['testimonials'] = Testimonial.objects.filter(active=True)
         try:

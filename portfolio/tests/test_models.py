@@ -61,7 +61,7 @@ class TestProjectModel(TestCase):
             testimonial.save()
 
             subject = 'Request for feedback'
-            message = render_to_string('email_templates/testimonial_message.html', context={'testi': testimonial})
+            message = render_to_string('email_templates/testimonial_message.html', context={'testimonial': testimonial})
             patch_send_mail.assert_called_once_with(subject, '', settings.EMAIL_HOST_USER, [testimonial.email],
                                                     html_message=message, fail_silently=False)
 

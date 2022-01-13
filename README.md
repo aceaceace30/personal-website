@@ -1,7 +1,7 @@
 <img src="./portfolio/static/portfolio/assets/img/favicon.png" alt="Site Logo" align="right">
 
 # Personal Website 
-> http://acedev30.pythonanywhere.com
+> https://ace-personal-website.herokuapp.com/
 This is my personal website used for sharing recent projects and details about myself.
 
 ### Built With

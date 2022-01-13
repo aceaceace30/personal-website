@@ -12,5 +12,5 @@ Python, Postgres
 
 ## Api Reference
 
-Link to drf browsable documentation: http://acedev30.pythonanywhere.com/api/v1/ 
+Link to drf browsable documentation: https://ace-personal-website.herokuapp.com/api/v1/ 
 

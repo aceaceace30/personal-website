@@ -51,7 +51,15 @@
             </div>
 
             <div class="portfolio-description">
-                <h2 class="font-weight-bold">{{ project.name }}</h2>
+                <h2 class="font-weight-bold">
+                    {{ project.name }}
+                    {% if request.user.is_superuser %}
+                        <a href="{% url 'admin:portfolio_project_change' project.id %}" class="btn btn-secondary btn-sm">
+                            Edit
+                        </a>
+                    {% endif %}
+                </h2>
+
                 <p>{{ project.description|safe }}</p>
 
                 {% if previous_project %}

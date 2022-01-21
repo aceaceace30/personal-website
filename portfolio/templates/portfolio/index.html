@@ -113,12 +113,16 @@
                             <li>{{ info.email }}</li>
                         </ul>
                     </div>
-
                     <h3 class="resume-title">Education</h3>
                     <div class="resume-item">
-                        <h4>Bachelor of Science in Information Technology</h4>
-                        <h5>2014 - 2018</h5>
-                        <p><em>STI College Makati, Makati City</em></p>
+                        <h4>{{ info.education_title1 }}</h4>
+                        <h5>{{ info.education_year1 }}</h5>
+                        <p><em>{{ info.education_location1 }}</em></p>
+                    </div>
+                    <div class="resume-item">
+                        <h4>{{ info.education_title2 }}</h4>
+                        <h5>{{ info.education_year2 }}</h5>
+                        <p><em>{{ info.education_location2 }}</em></p>
                     </div>
                 </div>
                 <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
@@ -194,15 +198,15 @@
             </div>
 
             <div class="row" data-aos="fade-in">
-                {% for testi in testimonials %}
-                    <div class="col-lg-4">
+                {% for testimonial in testimonials %}
+                    <div class="col-lg-4 pt-3">
                         <div class="card shadow h-100">
                             <div class="card-body">
-                                <p class="card-text font-italic h5">"{{ testi.positive_remarks }}"</p>
+                                <p class="card-text font-italic h5">"{{ testimonial.positive_remarks }}"</p>
                                 <hr/>
-                                <small class="font-weight-bold">{{ testi.name }}<br/>{{ testi.platform }}</small>
+                                <small class="font-weight-bold">{{ testimonial.name }}<br/>{{ testimonial.platform }}</small>
                                 <br/>
-                                <small>{{ testi.created_at|date:"M d, Y" }}</small>
+                                <small>{{ testimonial.created_at|date:"M d, Y" }}</small>
                             </div>
                         </div>
                     </div>

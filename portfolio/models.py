@@ -209,15 +209,18 @@ class Testimonial(models.Model):
         """Override save method to send email on initial creation"""
         if not self.pk:
             subject = 'Request for feedback'
-            message = render_to_string('email_templates/testimonial_message.html', context={'testi': self})
-            send_mail(
-                subject,
-                '',
-                settings.EMAIL_HOST_USER,
-                [self.email],
-                html_message=message,
-                fail_silently=False
-            )
+            message = render_to_string('email_templates/testimonial_message.html', context={'testimonial': self})
+            try:
+                send_mail(
+                    subject,
+                    '',
+                    settings.EMAIL_HOST_USER,
+                    [self.email],
+                    html_message=message,
+                    fail_silently=False
+                )
+            except:
+                pass
         super().save(**kwargs)
 
 

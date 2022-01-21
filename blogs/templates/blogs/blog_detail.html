@@ -10,7 +10,15 @@
                 <div class="col-lg-10">
                     <div class="card shadow">
                         <div class="card-body">
+                            {% if request.user.is_superuser %}
+                                <div class="float-right">
+                                    <a href="{% url 'admin:blogs_blog_change' blog.id %}" class="btn btn-secondary btn-sm">
+                                        Edit
+                                    </a>
+                                </div>
+                            {% endif %}
                             <h2 class="card-title font-weight-bold">{{ blog.title }}</h2>
+
                             <p class="card-text">
                                 {% include 'blogs/includes/tags.html' %}
                             </p>

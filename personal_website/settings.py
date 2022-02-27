@@ -165,6 +165,11 @@ EMAIL_HOST_PASSWORD = env.str('EMAIL_HOST_PASSWORD')
 EMAIL_PORT = 587
 
 EMAIL_ADMIN = env.str('EMAIL_ADMIN')
+
+ADMINS = [
+    ('admin', EMAIL_ADMIN)
+]
+
 DOMAIN_NAME = env.str('DOMAIN_NAME')
 PROJECT_REPO_LINK = 'https://github.com/aceaceace30/portfolio'
 

@@ -5,7 +5,7 @@
 This is my personal website used for sharing recent projects and details about myself.
 
 ### Built With
-Python 3.7, Django 3.1.2, Django Rest Framework 3.12.2, Postgres, Bootstrap, Jquery
+Python 3.9, Django 4.0.2, Postgres, Bootstrap 4 and JQuery
 
 ### Prerequisites
 Python, Postgres

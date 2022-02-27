@@ -187,3 +187,7 @@ CELERY_BROKER_URL = 'redis://localhost:6379'
 #         'schedule': crontab(hour=9),
 #     }
 # }
+
+# Default primary key field type
+# https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

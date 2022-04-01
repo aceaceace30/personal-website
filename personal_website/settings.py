@@ -157,17 +157,17 @@ else:
 CKEDITOR_UPLOAD_PATH = 'ckeditor/uploads/'
 
 # Email settings
-
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_SUBJECT_PREFIX = '[PERSONAL-WEBSITE] '
 EMAIL_HOST_USER = env.str('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = env.str('EMAIL_HOST_PASSWORD')
 EMAIL_PORT = 587
-
-EMAIL_ADMIN = env.str('EMAIL_ADMIN')
+DEFAULT_FROM_EMAIL = env.str('DEFAULT_FROM_EMAIL')
+SERVER_EMAIL = env.str('EMAIL_HOST_USER')
 
 ADMINS = [
-    ('admin', EMAIL_ADMIN)
+    ('admin', env.str('EMAIL_ADMIN'))
 ]
 
 DOMAIN_NAME = env.str('DOMAIN_NAME')
@@ -185,7 +185,7 @@ REST_FRAMEWORK = {
 CELERY_RESULT_BACKEND = 'django-db'
 CELERY_BROKER_URL = 'redis://localhost:6379'
 
-# Commented because the server can't have another celery worker because the number of process is maxed out
+# Server can't have another celery worker because the number of process is maxed out
 # CELERY_BEAT_SCHEDULE = {
 #     'check-site-broken-links-everyday': {
 #         'task': 'check_site_broken_links',

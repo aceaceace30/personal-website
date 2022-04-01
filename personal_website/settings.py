@@ -166,8 +166,10 @@ EMAIL_PORT = 587
 DEFAULT_FROM_EMAIL = env.str('EMAIL_HOST_USER')
 SERVER_EMAIL = env.str('EMAIL_HOST_USER')
 
+EMAIL_ADMIN = env.str('EMAIL_ADMIN')
+
 ADMINS = [
-    ('admin', env.str('EMAIL_ADMIN'))
+    ('admin', EMAIL_ADMIN)
 ]
 
 DOMAIN_NAME = env.str('DOMAIN_NAME')

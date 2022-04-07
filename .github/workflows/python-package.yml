@@ -20,8 +20,8 @@ jobs:
         image: postgres
         ports: ['5432:5432']
         env:
-          POSTGRES_USER: ${{ secrets.DB_USER }}
-          POSTGRES_PASSWORD: ${{ secrets.DB_PASS }}
+          POSTGRES_USER: personal-website
+          POSTGRES_PASSWORD: personal-website
         options: >-
           --health-cmd pg_isready
           --health-interval 10s
@@ -43,12 +43,7 @@ jobs:
       env:
         SECRET_KEY: ${{ secrets.SECRET_KEY }}
         DEBUG: ${{ secrets.DEBUG }}
-        DB_ENGINE: ${{ secrets.DB_ENGINE }}
-        DB_NAME: ${{ secrets.DB_NAME }}
-        DB_USER: ${{ secrets.DB_USER }}
-        DB_PASS: ${{ secrets.DB_PASS }}
-        DB_HOST: ${{ secrets.DB_HOST }}
-        DB_PORT: ${{ secrets.DB_PORT }}
+        DATABASE_URL: ${{ secrets.DATABASE_URL }}
         EMAIL_HOST_USER: ${{ secrets.EMAIL_HOST_USER }}
         EMAIL_HOST_PASSWORD: ${{ secrets.EMAIL_HOST_PASSWORD }}
         EMAIL_ADMIN: ${{ secrets.EMAIL_ADMIN }}

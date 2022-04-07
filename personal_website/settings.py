@@ -4,6 +4,7 @@ Django settings for personal_website project.
 
 import os
 import environ
+import dj_database_url
 from celery.schedules import crontab
 
 env = environ.Env()
@@ -84,14 +85,7 @@ WSGI_APPLICATION = 'personal_website.wsgi.application'
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': env.str('DB_ENGINE'),
-        'NAME': env.str('DB_NAME'),
-        'USER': env.str('DB_USER'),
-        'PASSWORD': env.str('DB_PASS'),
-        'HOST': env.str('DB_HOST'),
-        'PORT': env.int('DB_PORT'),
-    }
+    'default': dj_database_url.config(conn_max_age=120)
 }
 
 

@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: personal-website
+  labels:
+    app: personal-website
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: personal-website
+  template:
+    metadata:
+      labels:
+        app: personal-website
+    spec:
+      containers:
+        - name: personal-website
+          image: aceaceace30/personal-website:latest
+          imagePullPolicy: IfNotPresent
+          envFrom:
+            - secretRef:
+                name: secret-personal-website
+          command:
+            - python
+            - manage.py
+            - runserver
+            - 0.0.0.0:80
+          ports:
+            - containerPort: 80

@@ -84,8 +84,14 @@ WSGI_APPLICATION = 'personal_website.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
+# DATABASES = {
+#     'default': dj_database_url.config(conn_max_age=120)
+# }
 DATABASES = {
-    'default': dj_database_url.config(conn_max_age=120)
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'personalwebsitedb.sqlite3'),
+    }
 }
 
 

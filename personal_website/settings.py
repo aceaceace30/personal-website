@@ -4,6 +4,7 @@ Django settings for personal_website project.
 
 import os
 import environ
+import dj_database_url
 from celery.schedules import crontab
 
 env = environ.Env()
@@ -50,7 +51,9 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.cache.UpdateCacheMiddleware',
     'django.middleware.common.CommonMiddleware',
+    'django.middleware.cache.FetchFromCacheMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -82,14 +85,7 @@ WSGI_APPLICATION = 'personal_website.wsgi.application'
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': env.str('DB_ENGINE'),
-        'NAME': env.str('DB_NAME'),
-        'USER': env.str('DB_USER'),
-        'PASSWORD': env.str('DB_PASS'),
-        'HOST': env.str('DB_HOST'),
-        'PORT': env.int('DB_PORT'),
-    }
+    'default': dj_database_url.config(conn_max_age=120)
 }
 
 
@@ -157,14 +153,21 @@ else:
 CKEDITOR_UPLOAD_PATH = 'ckeditor/uploads/'
 
 # Email settings
-
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_SUBJECT_PREFIX = '[PERSONAL-WEBSITE] '
 EMAIL_HOST_USER = env.str('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = env.str('EMAIL_HOST_PASSWORD')
 EMAIL_PORT = 587
+DEFAULT_FROM_EMAIL = env.str('EMAIL_HOST_USER')
+SERVER_EMAIL = env.str('EMAIL_HOST_USER')
 
 EMAIL_ADMIN = env.str('EMAIL_ADMIN')
+
+ADMINS = [
+    ('admin', EMAIL_ADMIN)
+]
+
 DOMAIN_NAME = env.str('DOMAIN_NAME')
 PROJECT_REPO_LINK = 'https://github.com/aceaceace30/portfolio'
 
@@ -180,7 +183,7 @@ REST_FRAMEWORK = {
 CELERY_RESULT_BACKEND = 'django-db'
 CELERY_BROKER_URL = 'redis://localhost:6379'
 
-# Commented because the server can't have another celery worker because the number of process is maxed out
+# Server can't have another celery worker because the number of process is maxed out
 # CELERY_BEAT_SCHEDULE = {
 #     'check-site-broken-links-everyday': {
 #         'task': 'check_site_broken_links',

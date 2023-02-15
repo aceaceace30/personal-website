@@ -1,10 +1,9 @@
-from django.conf import settings
-from django.core.mail import send_mail
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import ListView, DetailView, UpdateView, TemplateView
+from django.views.decorators.cache import cache_page
 
 from .decorators import check_if_testimonial_is_answered
 from .mixins import InformationMixin
@@ -12,6 +11,7 @@ from .models import Project, Message, Testimonial
 from .tasks import send_mail_task
 
 
+@method_decorator(cache_page(60*5), name='dispatch')
 class HomeListView(InformationMixin, ListView):
     template_name = 'portfolio/index.html'
     model = Project

@@ -59,12 +59,14 @@
                 <div class="col-lg-6" data-aos="fade-up">
                     {% for skill in skill_set1 %}
                         <div class="progress">
-                            <span class="skill">{{ skill.name }} <i class="val">{{ skill.value }}%</i></span>
+                            <span class="skill">{{ skill.name }}<!-- <i class="val">{{ skill.value }}%</i>--></span>
+                            <!--
                             <div class="progress-bar-wrap">
                                 <div class="progress-bar" role="progressbar" aria-valuenow="{{ skill.value }}"
                                      aria-valuemin="0"
                                      aria-valuemax="100"></div>
                             </div>
+                            -->
                         </div>
                     {% endfor %}
                 </div>
@@ -72,12 +74,14 @@
                 <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
                     {% for skill in skill_set2 %}
                         <div class="progress">
-                            <span class="skill">{{ skill.name }} <i class="val">{{ skill.value }}%</i></span>
+                            <span class="skill">{{ skill.name }}<!-- <i class="val">{{ skill.value }}%</i>--></span>
+                            <!--
                             <div class="progress-bar-wrap">
                                 <div class="progress-bar" role="progressbar" aria-valuenow="{{ skill.value }}"
                                      aria-valuemin="0"
                                      aria-valuemax="100"></div>
                             </div>
+                            -->
                         </div>
                     {% endfor %}
                 </div>
@@ -118,11 +122,6 @@
                         <h4>{{ info.education_title1 }}</h4>
                         <h5>{{ info.education_year1 }}</h5>
                         <p><em>{{ info.education_location1 }}</em></p>
-                    </div>
-                    <div class="resume-item">
-                        <h4>{{ info.education_title2 }}</h4>
-                        <h5>{{ info.education_year2 }}</h5>
-                        <p><em>{{ info.education_location2 }}</em></p>
                     </div>
                 </div>
                 <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">

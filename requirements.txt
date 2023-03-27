@@ -29,4 +29,4 @@ model-bakery==1.4.0
 # Queue
 celery==5.2.3
 django-celery-results==2.4.0
-redis==4.1.4
+redis==4.5.3
